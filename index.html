@@ -12,6 +12,7 @@
   
   <body onload="loadData()">
     <canvas id="game" width="1920px" height="1000px"></canvas><!-- this is the area for the game to run on -->
+    <p style="position:fixed; left:1200px; top: 25px; background-color: #e5e5e5; font-size: 25px; font-weight: 850px; font-family: monospace;">Some of the Images will be 1 hour behind because<br> of how they are stored in the noaa database</p>
     <img id="showimage" width="1000px" height="750px" style="position:fixed;left:850px;top:100px;background-color: #e5e5e5;object-fit: cover;">
     <div id="showimagebg" width="1000px" height="750px" style="position:fixed;left:500px;top:100px;background-color: #e5e5e5;object-fit: cover;"></div>
     <div id="dropdowns">
@@ -198,17 +199,17 @@
       }
 
       function modify(){
-        if (Number(slider.value)+12+1 >= 24){
-          if (Number(slider.value) - 11 < 10){
-            return "0"+(Number(slider.value) - 11).toString()
+        if (Number(slider.value)+12 >= 24){
+          if (Number(slider.value) - 12 < 10){
+            return "0"+(Number(slider.value) - 12).toString()
           } else {
-            return Number(slider.value) - 11
+            return Number(slider.value) - 12
           }
         } else {
-          if (Number(slider.value) + 13 < 10){
-            return "0"+(Number(slider.value) + 13).toString()
+          if (Number(slider.value) + 12 < 10){
+            return "0"+(Number(slider.value) + 12).toString()
           } else {
-            return Number(slider.value) + 13
+            return Number(slider.value) + 12
           }
         }
       }
