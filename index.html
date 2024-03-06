@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    
+    <title>Something</title>
+    
+    <link href="style.css" rel="stylesheet" type="text/css" />  <!--This is to format any html objects that aren't in the canvas -->
+  </head>
+  
+  <body onload="loadData()">
+    <canvas id="game" width="1920px" height="1000px"></canvas><!-- this is the area for the game to run on -->
+    <img id="showimage" width="1000px" height="750px" style="position:fixed;left:850px;top:100px;background-color: #e5e5e5;object-fit: cover;">
+    <div id="showimagebg" width="1000px" height="750px" style="position:fixed;left:500px;top:100px;background-color: #e5e5e5;object-fit: cover;"></div>
+    <div id="dropdowns">
+      <label for="STARTYEAR" id="textYear">Select Year</label>
+      <select name="STARTYEAR" id="dateYear">
+        <option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011" selected="selected">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option>		
+      </select>
+      <br>
+      <label for="STARTMONTH" id="textMonth">Select Month</label>
+      <select name="STARTMONTH" id="dateMonth" onchange="loadData()">
+        <option value="01">Jan</option>
+        <option value="02">Feb</option>
+        <option value="03">Mar</option>
+        <option value="04" selected="selected">Apr</option>
+        <option value="05">May</option>
+        <option value="06">Jun</option>
+        <option value="07">Jul</option>
+        <option value="08">Aug</option>
+        <option value="09">Sep</option>
+        <option value="10">Oct</option>
+        <option value="11">Nov</option>
+        <option value="12">Dec</option>
+      </select>
+      <br>
+      <label for="STARTDAY" id="textDay">Select Day</label>
+      <select name="STARTDAY" id="dateDay" onchange="loadData()">
+        <option value="01"> 1</option>
+        <option value="02"> 2</option>
+        <option value="03"> 3</option>
+        <option value="04"> 4</option>
+        <option value="05"> 5</option>
+        <option value="06"> 6</option>
+        <option value="07"> 7</option>
+        <option value="08"> 8</option>
+        <option value="09"> 9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27" selected="selected">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+      </select>
+      <button onclick="switchDisplayDate()" id="displayButton">Display Date: ON</button>
+      <br>
+      <hr \>
+      <p id="timeSliderTxt">12Z</p>
+      <input type="range" min="-7" max="23" value="0" id="timeSlider">
+      <br>
+      <p id="paramSection2">-Parameter Selection-</p>
+      <div>
+        <p id="paramSection">Observations</p>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('bigsfc.gif')">Regional Surface Chart</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('1kmv.gif')">Visual Satellite Image</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlrad.gif')">Base Reflectivity Mosiac</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlwarn.gif')">Watch/Warning Summary</button>
+        <p id="paramSection">Basic UA/Forcing Fields</p>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('300mb.gif')">300 mb</button>	
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('500mb.gif')">500 mb</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('700mb.gif')">700 mb</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('850mb.gif')">850 mb</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('alsr.gif')">Anvil Level SR Winds</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('hlsr.gif')">9-11km SR Winds</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlsr.gif')">4-6km SR Winds</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('llsr.gif')">0-2km SR Winds</button>
+        <button id="paramSelect" onclick="changeParam('dlcp.gif')">Deep Moisture Conv</button>
+        <button id="paramSelect" onclick="changeParam('sfnt.gif')">Surface Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('tadv.gif')">850 mb Temperature Advection</button>
+        <button id="paramSelect" onclick="changeParam('8fnt.gif')">850 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('7fnt.gif')">700 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('857f.gif')">850-700 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('75ft.gif')">700-500 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('vadv.gif')">700-400 mb Diff. Vort. Advection</button>
+        <button id="paramSelect" onclick="changeParam('padv.gif')">400-250 mb Pot. Vort. Advection</button>
+        <button id="paramSelect" onclick="changeParam('ddiv.gif')">850-250 mb Diff. Diverge</button>
+        <button id="paramSelect" onclick="changeParam('ageo.gif')">300 mb Jet Circulation</button>
+        <button id="paramSelect" onclick="changeParam('mnwd.gif')">850-300mb Mean Wind</button>
+        <p id="paramSection">Thermodynamic Fields</p>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('sbcp.gif')">SBCape / Cin</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlcp.gif')">MLCape</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;"onclick="changeParam('mucp.gif')">MUCape / LPL Height</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('muli.gif')">SB Lifted Index / CINH</button>
+        <button id="paramSelect" onclick="changeParam('laps.gif')">Mid Level Lapse Rates</button>
+        <button id="paramSelect" onclick="changeParam('lllr.gif')">Low Level Lapse Rates</button>
+        <button id="paramSelect" onclick="changeParam('ncap.gif')">Normalized Cape</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('dcape.gif')">Downdraft Cape</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif')">LFC Height</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif')">LCL Height</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfrh.gif')">LCL - LFC RH</button>
+        <p id="paramSection">Wind Shear</p>
+        <button id="paramSelect" onclick="changeParam('xover.gif')">850 &amp; 500 mb winds</button>
+        <button id="paramSelect" onclick="changeParam('eshr.gif')">Effective Shear</button>
+        <button id="paramSelect" onclick="changeParam('brns.gif')">BRN Shear</button>
+        <button id="paramSelect" onclick="changeParam('srh1.gif')">0-1km SR Helicity</button>
+        <button id="paramSelect" onclick="changeParam('srh3.gif')">0-3km SR Helicity</button>
+        <button id="paramSelect" onclick="changeParam('effh.gif')">Effective SR Helicity</button>
+        <button id="paramSelect" onclick="changeParam('shr1.gif')">0-1km Shear Vector</button>
+        <button id="paramSelect" onclick="changeParam('shr6.gif')">0-6km Shear Vector</button>
+        <button id="paramSelect" onclick="changeParam('shr8.gif')">0-8km Shear Vector</button>
+        <p id="paramSection">Composite Indices</p>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('scp.gif')">Supercell Composite</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('lscp.gif')">Left-Moving SCP</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('stor.gif')">Fixed Layer STP</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('stpc.gif')">Effective Layer STP</button>
+        <button id="paramSelect" onclick="changeParam('sigh.gif')">Significant Hail Param.</button>
+        <button id="paramSelect" onclick="changeParam('mcsm.gif')">MCS maintenance prob.</button>
+        <button id="paramSelect" onclick="changeParam('dcp.gif')">Decrecho Composite</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('cbsig.gif')">Craven/Brooks SigSvr</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('ehi3.gif')">3km EHI</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('ehi1.gif')">1km EHI</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('vgp3.gif')">3km VGP</button>
+        <p id="paramSection">Multi-Parameter Fields</p>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('cpsh.gif')">MUCAPE &amp; eff. bulk shear</button>
+        <button id="paramSelect" style="width:24%;"onclick="changeParam('comp.gif')">MULI, 850 &amp; 500 mb winds</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('lcls.gif')">LCL hght/0-1 km SRH</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('lr3c.gif')">LL Lapse Rates/3Cape (ML)</button>
+        <button id="paramSelect" onclick="changeParam('3cvr.gif')">3Cape (ML) &amp; Sfc Vorticity</button>
+        <button id="paramSelect" onclick="changeParam('tdlr.gif')">SFC Dewpt/700-500 mb LR</button>
+        <button id="paramSelect" onclick="changeParam('hail.gif')">Hail Parameters</button>
+        <p id="paramSection">Misc. Fields</p>
+        <button id="paramSelect" style="width:24%;"  onclick="changeParam('pwtr.gif')">PWAT (Precip. Water)</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('tran.gif')">850 mb Moisture Transport</button>
+        <button id="paramSelect" style="width:24%;"onclick="changeParam('prop.gif')">Upwind Propagation Vector</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('swbt.gif')">Surface Wet Bulb Temperature</button>
+        
+        <button id="paramSelect" onclick="changeParam('thck.gif')">Critical Thickness</button>
+        <button id="paramSelect" onclick="changeParam('epvl.gif')">800-750 mb EPVg</button>
+        <button id="paramSelect" onclick="changeParam('epvm.gif')">650-500 mb EPVg</button>
+        <button id="paramSelect"  onclick="changeParam('fzlv.gif')">Freezing Level Info.</button>
+        <button id="paramSelect" onclick="changeParam('les1.gif')">Lake Effect Snow 1</button>
+        <button id="paramSelect" onclick="changeParam('les2.gif')">Lake Effect Snow 2</button>
+        <button id="paramSelect" onclick="changeParam('sfir.gif')">Surface RH, Temperature, Wind</button>
+        <button id="paramSelect" onclick="changeParam('fosb.gif')">Fosberg Index</button>
+        <button id="paramSelect" onclick="changeParam('lasi.gif')">Lower Atmos. Severity Index</button>
+        <button id="paramSelect" onclick="changeParam('lhan.gif')">Low Altitude Haines Index</button>
+        <button id="paramSelect" onclick="changeParam('mhan.gif')">Mid Altitude Haines Index</button>
+        <button id="paramSelect" onclick="changeParam('hhan.gif')">High Altitude Haines Index</button>
+        
+      </div>
+
+      
+    </div>
+    <script>
+      var slider = document.getElementById("timeSlider");
+      var output = document.getElementById("timeSliderTxt");
+      var img = document.getElementById("showimage");
+      var displayDate = false;
+      var param = "bigsfc.gif";
+
+      function changeParam(n){
+        param = n;
+        loadData();
+      }
+
+      function modifyReal(){
+        if (Number(slider.value) + 12 >= 24){
+          if (Number(slider.value) - 12 < 10){
+            return ["0"+(Number(slider.value) - 12).toString(),1];
+          } else {
+            return [Number(slider.value) - 12,1];
+          }
+        } else {
+          if (Number(slider.value) + 12 < 10){
+            return ["0"+(Number(slider.value) + 12).toString(),0];
+          } else {
+            return [Number(slider.value) + 12,0];
+          }
+        }
+      }
+
+      function modify(){
+        if (Number(slider.value)+12+1 >= 24){
+          if (Number(slider.value) - 11 < 10){
+            return "0"+(Number(slider.value) - 11).toString()
+          } else {
+            return Number(slider.value) - 11
+          }
+        } else {
+          if (Number(slider.value) + 13 < 10){
+            return "0"+(Number(slider.value) + 13).toString()
+          } else {
+            return Number(slider.value) + 13
+          }
+        }
+      }
+      
+      output.innerHTML = modify()+"Z";
+
+      slider.oninput = function() {
+        loadData();
+        
+        output.innerHTML = modify()+"Z";
+      }
+
+      function leapyear(){
+        var year = document.getElementById("dateYear").value;
+        if (year % 4 == 0){
+          if (year % 100 == 0){
+            if (year % 400 == 0){
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return true;
+          }
+        } else {
+          return false;
+        }
+      }
+
+      function switchDisplayDate(){
+        displayDate = !displayDate;
+        var bt = document.getElementById("displayButton");
+
+        if (displayDate){
+          bt.innerHTML = "Display Date: OFF";
+          var year = document.getElementById("dateYear").value;
+
+          if (year >= 2023){
+            img.style.height = '600px';
+          } else {
+            img.style.height = '675px';
+          }
+        } else {
+          bt.innerHTML = "Display Date: ON";
+          img.style.height = '750px';
+        }
+      }
+
+      function loadData(){
+        const base = "https://www.spc.noaa.gov/exper/ma_archive/images_s4/";
+        var year = document.getElementById("dateYear").value;
+        var month = Number(document.getElementById("dateMonth").value);
+        var day = Number(document.getElementById("dateDay").value);
+        var hour = slider.value;
+        
+
+        var trueHour = modifyReal();
+
+        if (trueHour[1] == 1){
+          day += 1;
+
+          if ((day > 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day > 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
+            month += 1;
+            day = 0;
+          }
+        }
+
+        //if (trueHour < 10){
+        //  trueHour = "0"+trueHour;
+       // }
+
+        if (day < 10){
+          day = "0"+day;
+        }
+
+        if (month < 10){
+          month = "0"+month;
+        }
+
+        var string = base + year.toString() + month.toString() + day.toString() +"/"+trueHour[0]+"_"+param;
+
+        console.log(string);
+
+        img.src = string;
+      }
+    </script>
+  </body>
+</html>

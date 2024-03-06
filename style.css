@@ -1,0 +1,126 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+}
+
+canvas{
+  position:absolute;
+  background-color: #765b76;
+}
+
+div#dropdowns{
+  z-index: 2;
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 800px;
+  height: 1000px;
+  padding:1%;
+}
+
+#dateYear, #dateMonth, #dateDay{
+  color: #000;
+  font: Sans-Serif;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 5px 5px 5px 5px;
+  width: 100px;
+  height: 50px;
+}
+
+#BASICPARAMS {
+  color: #000;
+  font: Sans-Serif;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 5px 5px 5px 5px;
+  width: 100%;
+  height: 50px;
+}
+
+#textYear,#textMonth,#textDay,#timeSliderTxt{
+  color: #dd3c3c;
+  font-family: Sans-Serif;
+  font-size: 30px;
+  font-weight: 800;
+  padding: 5px 5px 5px 5px;
+  width: 100px;
+  height: 50px;
+}
+
+#loadButton,#displayButton {
+  color: #dd3c3c;
+  font-family: Sans-Serif;
+  font-size: 25px;
+  font-weight: 800;
+  padding: 5px 5px 5px 5px;
+  width: 50%;
+  height: 50px;
+}
+
+#timeSliderTxt{
+  color: #fff;
+  height:25px;
+  margin: 3px;
+  font-weight: 900;
+  font-family: monospace;
+}
+
+#paramSelect{
+  color: #fff;
+  height: 20px;
+  font-size: 15px;
+  width:32%;
+  font-weight: 100;
+  font-family: Cambria;
+  justify-items: center;
+  border: 2px 2px 2px 2px;
+  border-color: #222;
+  background-color: #444;
+}
+
+#paramSection{
+  color: #f00;
+  height: 26px;
+  font-size: 22px;
+  font-weight: 850;
+  font-family: Cambria;
+  justify-items: center;
+  border: 2px 2px 2px 2px;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+  border-color: #222;
+  background-color: #000;
+}
+
+#paramSection2{
+  color: #fff;
+  height: 35px;
+  font-size: 34px;
+  font-weight: 750;
+  font-family: monospace;
+  justify-items: center;
+  border: 2px 2px 2px 2px;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+}
+
+#dateHour{
+  color: #000;
+  font: Sans-Serif;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 5px 5px 5px 5px;
+  width: 100px;
+  height: 50px;
+}
+
+#timeSlider{
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+}
