@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<!-- @DiamondFlight on Github -->
+<!--@DiamondFlight on Github-->
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     
-    <title>SPC Meso Archive</title>
+    <title>Something</title>
     
-    <link href="style.css" rel="stylesheet" type="text/css" />  <!--This is to format any html objects that aren't in the canvas -->
+    <link href="sheets/style.css" rel="stylesheet" type="text/css" />  <!--This is to format any html objects that aren't in the canvas -->
   </head>
   
-  <body onload="loadData()">
-    <canvas id="game" width="1920px" height="1000px"></canvas><!-- this is the area for the game to run on -->
-    <p style="position:fixed; left:1000px; top: 0px; background-color: #e5e5e5; font-size: 25px; font-weight: 850px; font-family: monospace;">Some of the Images will be 1 hour behind because<br> of how they are stored in the noaa database</p>
-    <img id="showimage" width="1000px" height="750px" style="position:fixed;left:850px;top:100px;background-color: #e5e5e5;object-fit: cover;">
-    <div id="showimagebg" width="1000px" height="750px" style="position:fixed;left:500px;top:100px;background-color: #e5e5e5;object-fit: cover;"></div>
+  <body onload="loadData()" style="background-color: #765b76;">
+    <p style="position:fixed; left:390px; top: 0px; background-color: #e5e5e5; font-size: 20px; font-weight: 850px; font-family: monospace;">Some of the Images will be 1 hour<br> behind because of how they are<br> stored in the noaa database</p>
+    <canvas id="imageCa" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5"></canvas>
+    <!--<img id="showimage" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5;object-fit: cover;">-->
+    <div id="showimagebg" width="1000px" height="750px" style="position:absolute;left:500px;top:20px;background-color: #e5e5e5;object-fit: cover;"></div>
     <div id="dropdowns">
       <label for="STARTYEAR" id="textYear">Select Year</label>
       <select name="STARTYEAR" id="dateYear">
@@ -71,104 +71,122 @@
         <option value="30">30</option>
         <option value="31">31</option>
       </select>
-      <!--<button onclick="switchDisplayDate()" id="displayButton">Display Date: ON</button>-->
+      <button onclick="switchDisplayDate()" id="displayButton">Display Date: ON</button>
       <br>
       <hr \>
       <p id="timeSliderTxt">12Z</p>
       <input type="range" min="-7" max="23" value="0" id="timeSlider">
       <br>
       <p id="paramSection2">-Parameter Selection-</p>
-      <div>
-        <p id="paramSection">Observations</p>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('bigsfc.gif')">Regional Surface Chart</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('1kmv.gif')">Visual Satellite Image</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlrad.gif')">Base Reflectivity Mosiac</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlwarn.gif')">Watch/Warning Summary</button>
+      <div id="sectionParams">
+        <p id="paramSection">Observations/Basic Surface</p>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('bigsfc.gif','Surface Weather Plot')">Regional Surface Chart</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('1kmv.gif','Visual Satellite')">Visual Satellite Image</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlrad.gif','NWS Composite Reflectivity')">Base Reflectivity Mosiac</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlwarn.gif','Watch/Warning Summary')">Watch/Warning Summary</button>
+        <button id="paramSelect" style="width:19%;" onclick="changeParam('pmsl.gif','MSL Pressure and Surface Wind')">MSL Pressure/Wind</button>
+        <button id="paramSelect" style="width:18%;" onclick="changeParam('ttd.gif','Surface Temp, Dewpoint, and pmsl')">T / Td / Wind</button>
+        <button id="paramSelect" style="width:22%;" onclick="changeParam('mcon.gif','Surface Mstr Conv and Mixing Ratio (fill)')">Moisture Convergence</button>
+        <button id="paramSelect" style="width:19%;" onclick="changeParam('thea.gif','Surface Thete-E (fill) / Advection (C/hr)')">ThetaE Advection</button>
+        <button id="paramSelect" style="width:19%;" onclick="changeParam('pchg.gif','2hr sfc pres chg (mb)')">2hr Pres Change</button>
         <p id="paramSection">Basic UA/Forcing Fields</p>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('300mb.gif')">300 mb</button>	
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('500mb.gif')">500 mb</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('700mb.gif')">700 mb</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('850mb.gif')">850 mb</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('alsr.gif')">Anvil Level SR Winds</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('hlsr.gif')">9-11km SR Winds</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlsr.gif')">4-6km SR Winds</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('llsr.gif')">0-2km SR Winds</button>
-        <button id="paramSelect" onclick="changeParam('dlcp.gif')">Deep Moisture Conv</button>
-        <button id="paramSelect" onclick="changeParam('sfnt.gif')">Surface Frontogenesis</button>
-        <button id="paramSelect" onclick="changeParam('tadv.gif')">850 mb Temperature Advection</button>
-        <button id="paramSelect" onclick="changeParam('8fnt.gif')">850 mb Frontogenesis</button>
-        <button id="paramSelect" onclick="changeParam('7fnt.gif')">700 mb Frontogenesis</button>
-        <button id="paramSelect" onclick="changeParam('857f.gif')">850-700 mb Frontogenesis</button>
-        <button id="paramSelect" onclick="changeParam('75ft.gif')">700-500 mb Frontogenesis</button>
-        <button id="paramSelect" onclick="changeParam('vadv.gif')">700-400 mb Diff. Vort. Advection</button>
-        <button id="paramSelect" onclick="changeParam('padv.gif')">400-250 mb Pot. Vort. Advection</button>
-        <button id="paramSelect" onclick="changeParam('ddiv.gif')">850-250 mb Diff. Diverge</button>
-        <button id="paramSelect" onclick="changeParam('ageo.gif')">300 mb Jet Circulation</button>
-        <button id="paramSelect" onclick="changeParam('mnwd.gif')">850-300mb Mean Wind</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('300mb.gif','300mb hght/divergence/wind')">300 mb</button>	
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('500mb.gif','500mb hght/temp/wind')">500 mb</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('700mb.gif','700mb hght/wind/temp/700-500mb mean RH (fill)')">700 mb</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('850mb.gif','850mb hght/temp/dwpt (fill)/wind')">850 mb</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('alsr.gif','Anvil SR Winds')">Anvil Level SR Winds</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('hlsr.gif','850mb & 500mb Wind Crossover')">9-11km SR Winds</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlsr.gif','Mid Level SR Winds')">4-6km SR Winds</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('llsr.gif','SFC-2km SR Winds')">0-2km SR Winds</button>
+        <button id="paramSelect" onclick="changeParam('dlcp.gif','Deep Layer mstr flux cvgnc and 100mb mean mixing ratio')">Deep Moisture Conv</button>
+        <button id="paramSelect" onclick="changeParam('sfnt.gif','SFC Frontogenesis, temp, pres, and wind')">Surface Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('tadv.gif','850mb temperature advection (fill - 10e-5 C/s)')">850 mb Temperature Advection</button>
+        <button id="paramSelect" onclick="changeParam('8fnt.gif','850mb Petterssen frontogenesis (fill)')">850 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('7fnt.gif','700mb Petterssen frontogenesis (fill)')">700 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('857f.gif','850-700mb mean Petterssen frontogenesis (fill)')">850-700 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('75ft.gif','700-500mb mean Petterssen frontogenesis (fill))">700-500 mb Frontogenesis</button>
+        <button id="paramSelect" onclick="changeParam('vadv.gif','700-400mb differential vorticity advection, 500mb height/vorticity (fill)')">700-400 mb Diff. Vort. Advection</button>
+        <button id="paramSelect" onclick="changeParam('padv.gif','400-250mb (fill)/mean potential vorticity advection and 300mb streamlines')">400-250 mb Pot. Vort. Advection</button>
+        <button id="paramSelect" onclick="changeParam('ddiv.gif','850mb conv(red), 850mb differential divergence (fill), 250mb divergence (purple)')">850-250 mb Diff. Diverge</button>
+        <button id="paramSelect" onclick="changeParam('ageo.gif','300mb isotach (fill), height, ageostrophic wind; 700-500mb layer-ave omega (magenta-up/red-down)')">300 mb Jet Circulation</button>
+        <button id="paramSelect" onclick="changeParam('mnwd.gif','850-300mb mean wind (kt)')">850-300mb Mean Wind</button>
         <p id="paramSection">Thermodynamic Fields</p>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('sbcp.gif')">SBCape / Cin</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlcp.gif')">MLCape</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;"onclick="changeParam('mucp.gif')">MUCape / LPL Height</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('muli.gif')">SB Lifted Index / CINH</button>
-        <button id="paramSelect" onclick="changeParam('laps.gif')">Mid Level Lapse Rates</button>
-        <button id="paramSelect" onclick="changeParam('lllr.gif')">Low Level Lapse Rates</button>
-        <button id="paramSelect" onclick="changeParam('ncap.gif')">Normalized Cape</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('dcape.gif')">Downdraft Cape</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif')">LFC Height</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif')">LCL Height</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfrh.gif')">LCL - LFC RH</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('sbcp.gif','SBCAPE (contour) and SBCIN (J/kg, shaded >25)')">SBCape / Cin</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlcp.gif','MLCAPE (contour) and MLCIN (J/kg, shaded >25)')">MLCape</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;"onclick="changeParam('mucp.gif','MUCAPE (contour) and lifted parcel level (m AGL, fill)')">MUCape / LPL Height</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('muli.gif','SBLI (500mb) and SBCIN (J/kg, shaded >25)')">SB Lifted Index / CINH</button>
+        <button id="paramSelect" onclick="changeParam('laps.gif','700-500mb LR (Mid Level)')">Mid Level Lapse Rates</button>
+        <button id="paramSelect" onclick="changeParam('lllr.gif','0-3km LR (Low Level)')">Low Level Lapse Rates</button>
+        <button id="paramSelect" onclick="changeParam('ncap.gif','Normalized Cape')">Normalized Cape</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('dcape.gif','DCAPE (downdraft)')">Downdraft Cape</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif','100mb mean Parcel LFC height (m AGL)')">LFC Height</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif','100mb mean Parcel LCL height (m AGL)')">LCL Height</button>
+        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfrh.gif','LCL-LFC mean RH (fill), MUCape >100 (contour)')">LCL - LFC RH</button>
         <p id="paramSection">Wind Shear</p>
-        <button id="paramSelect" onclick="changeParam('xover.gif')">850 &amp; 500 mb winds</button>
-        <button id="paramSelect" onclick="changeParam('eshr.gif')">Effective Shear</button>
-        <button id="paramSelect" onclick="changeParam('brns.gif')">BRN Shear</button>
-        <button id="paramSelect" onclick="changeParam('srh1.gif')">0-1km SR Helicity</button>
-        <button id="paramSelect" onclick="changeParam('srh3.gif')">0-3km SR Helicity</button>
-        <button id="paramSelect" onclick="changeParam('effh.gif')">Effective SR Helicity</button>
-        <button id="paramSelect" onclick="changeParam('shr1.gif')">0-1km Shear Vector</button>
-        <button id="paramSelect" onclick="changeParam('shr6.gif')">0-6km Shear Vector</button>
-        <button id="paramSelect" onclick="changeParam('shr8.gif')">0-8km Shear Vector</button>
+        <button id="paramSelect" onclick="changeParam('xover.gif','850mb & 500mb Wind Crossover')">850 &amp; 500 mb winds</button>
+        <button id="paramSelect" onclick="changeParam('eshr.gif','Effective bulk Shear (kt)')">Effective Shear</button>
+        <button id="paramSelect" onclick="changeParam('brns.gif','Bulk-Richardson Number Shear (BRN)')">BRN Shear</button>
+        <button id="paramSelect" onclick="changeParam('srh1.gif','0-1km SRH (m2/s2) and storm motion (kt)')">0-1km SR Helicity</button>
+        <button id="paramSelect" onclick="changeParam('srh3.gif','0-3km SRH (m2/s2) and storm motion (kt)')">0-3km SR Helicity</button>
+        <button id="paramSelect" onclick="changeParam('effh.gif','Eff. Inflow Base (fill, m AGL), ESRH (m2/s2), storm motion (kt)')">Effective SR Helicity</button>
+        <button id="paramSelect" onclick="changeParam('shr1.gif','SFC-1km shear Vector')">0-1km Shear Vector</button>
+        <button id="paramSelect" onclick="changeParam('shr6.gif','SFC-6km shear Vector')">0-6km Shear Vector</button>
+        <button id="paramSelect" onclick="changeParam('shr8.gif','SFC-8km shear Vector')">0-8km Shear Vector</button>
         <p id="paramSection">Composite Indices</p>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('scp.gif')">Supercell Composite</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('lscp.gif')">Left-Moving SCP</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('stor.gif')">Fixed Layer STP</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('stpc.gif')">Effective Layer STP</button>
-        <button id="paramSelect" onclick="changeParam('sigh.gif')">Significant Hail Param.</button>
-        <button id="paramSelect" onclick="changeParam('mcsm.gif')">MCS maintenance prob.</button>
-        <button id="paramSelect" onclick="changeParam('dcp.gif')">Decrecho Composite</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('cbsig.gif')">Craven/Brooks SigSvr</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('ehi3.gif')">3km EHI</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('ehi1.gif')">1km EHI</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('vgp3.gif')">3km VGP</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('scp.gif','Supercell Composite (eff layer) and Bunkers storm motion (kt)')">Supercell Composite</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('lscp.gif','Left-moving Supercell Composite (eff layer) and Bunkers left storm motion (kt)')">Left-Moving SCP</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('stor.gif','Significant Tornado Param (fixed layer), MLCIN (J/kg, shaded >25)')">Fixed Layer STP</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('stpc.gif','Significant Tornado Param (eff layer), MLCIN (J/kg, shaded >25)')">Effective Layer STP</button>
+        <button id="paramSelect" onclick="changeParam('sigh.gif','Significant Hail Parameter')">Significant Hail Param.</button>
+        <button id="paramSelect" onclick="changeParam('mcsm.gif','MCS mainenance Probability')">MCS maintenance prob.</button>
+        <button id="paramSelect" onclick="changeParam('dcp.gif','Derecho Composite')">Decrecho Composite</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('cbsig.gif','Craven/Brooks SigSvr')">Craven/Brooks SigSvr</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('ehi3.gif','3km EHI (truthers)')">3km EHI</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('ehi1.gif','1km EHI')">1km EHI</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('vgp3.gif','3km VGP, Shear vector')">3km VGP</button>
         <p id="paramSection">Multi-Parameter Fields</p>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('cpsh.gif')">MUCAPE &amp; eff. bulk shear</button>
-        <button id="paramSelect" style="width:24%;"onclick="changeParam('comp.gif')">MULI, 850 &amp; 500 mb winds</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('lcls.gif')">LCL hght/0-1 km SRH</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('lr3c.gif')">LL Lapse Rates/3Cape (ML)</button>
-        <button id="paramSelect" onclick="changeParam('3cvr.gif')">3Cape (ML) &amp; Sfc Vorticity</button>
-        <button id="paramSelect" onclick="changeParam('tdlr.gif')">SFC Dewpt/700-500 mb LR</button>
-        <button id="paramSelect" onclick="changeParam('hail.gif')">Hail Parameters</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('cpsh.gif','MUCAPE (red), MUCIN (fill), eff bulk shear (kt)')">MUCAPE &amp; eff. bulk shear</button>
+        <button id="paramSelect" style="width:24%;"onclick="changeParam('comp.gif','850mb & 500mb Wind Crossver and MULI (fill)')">MULI, 850 &amp; 500 mb winds</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('lcls.gif','LCL height (fill), 0-1km srh (contour)')">LCL hght/0-1 km SRH</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('lr3c.gif','0-3km LR (fill) and 0-3km MLCAPE (red)')">LL Lapse Rates/3Cape (ML)</button>
+        <button id="paramSelect" onclick="changeParam('3cvr.gif','0-3km MLCAPE and Surface Vorticity')">3Cape (ML) &amp; Sfc Vorticity</button>
+        <button id="paramSelect" onclick="changeParam('tdlr.gif','SFC Dewpoint (fill),700-500mb LR (Mid Level)')">SFC Dewpt/700-500 mb LR</button>
+        <button id="paramSelect" onclick="changeParam('hail.gif','Hail Parameter {Cape -10>-30C (red), frzg level (m), 0-6km shear (kt)}')">Hail Parameters</button>
         <p id="paramSection">Misc. Fields</p>
-        <button id="paramSelect" style="width:24%;"  onclick="changeParam('pwtr.gif')">PWAT (Precip. Water)</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('tran.gif')">850 mb Moisture Transport</button>
-        <button id="paramSelect" style="width:24%;"onclick="changeParam('prop.gif')">Upwind Propagation Vector</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('swbt.gif')">Surface Wet Bulb Temperature</button>
+        <button id="paramSelect" style="width:24%;"  onclick="changeParam('pwtr.gif','Precipitable water (in) lowest 400mb')">PWAT (Precip. Water)</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('tran.gif','850mb Moisture transport (fill/vector), 850mb height/theta-e')">850 mb Moisture Transport</button>
+        <button id="paramSelect" style="width:24%;"onclick="changeParam('prop.gif','precipitable water (fill), upwind propagation vectors, 1000-500mb thickness')">Upwind Propagation Vector</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('swbt.gif','Near freezing surface wet bulb temperatures, pres, and wind')">Surface Wet Bulb Temperature</button>
         
-        <button id="paramSelect" onclick="changeParam('thck.gif')">Critical Thickness</button>
-        <button id="paramSelect" onclick="changeParam('epvl.gif')">800-750 mb EPVg</button>
-        <button id="paramSelect" onclick="changeParam('epvm.gif')">650-500 mb EPVg</button>
-        <button id="paramSelect"  onclick="changeParam('fzlv.gif')">Freezing Level Info.</button>
-        <button id="paramSelect" onclick="changeParam('les1.gif')">Lake Effect Snow 1</button>
-        <button id="paramSelect" onclick="changeParam('les2.gif')">Lake Effect Snow 2</button>
-        <button id="paramSelect" onclick="changeParam('sfir.gif')">Surface RH, Temperature, Wind</button>
-        <button id="paramSelect" onclick="changeParam('fosb.gif')">Fosberg Index</button>
-        <button id="paramSelect" onclick="changeParam('lasi.gif')">Lower Atmos. Severity Index</button>
-        <button id="paramSelect" onclick="changeParam('lhan.gif')">Low Altitude Haines Index</button>
-        <button id="paramSelect" onclick="changeParam('mhan.gif')">Mid Altitude Haines Index</button>
-        <button id="paramSelect" onclick="changeParam('hhan.gif')">High Altitude Haines Index</button>
+        <button id="paramSelect" onclick="changeParam('thck.gif','Critical Thickness 1000-500mb red, 1000-700mb green, 1000-850mb blue, 850-700mb yellow, sfc temp OC magenta')">Critical Thickness</button>
+        <button id="paramSelect" onclick="changeParam('epvl.gif','850mb Frontogenesis (red), EPVGx (shaded) & conditional instability')">800-750 mb EPVg</button>
+        <button id="paramSelect" onclick="changeParam('epvm.gif','700mb Frontogenesis (red), EPVGx (shaded) & conditional instability')">650-500 mb EPVg</button>
+        <button id="paramSelect"  onclick="changeParam('fzlv.gif','Freezing level (kft), RH & boundary layer OC (red), FZL at model sfc (black)')">Freezing Level Info.</button>
+        <button id="paramSelect" onclick="changeParam('les1.gif','Boundary-layer RH (fill), sfc-850mb temp diff (orange), SBCAPE (red)')">Lake Effect Snow 1</button>
+        <button id="paramSelect" onclick="changeParam('les2.gif','Boundary-layer wind, streamlines, convergence (red), 850mb wind (blue)')">Lake Effect Snow 2</button>
+        <button id="paramSelect" onclick="changeParam('sfir.gif','SFC temp, RH (<=40%), pres and wind')">Surface RH, Temperature, Wind</button>
+        <button id="paramSelect" onclick="changeParam('fosb.gif','SPC Fosberg fire weather index >= 40')">Fosberg Index</button>
+        <button id="paramSelect" onclick="changeParam('lasi.gif','SPC Lower Atmospheric Severity Index (fill), SBCAPE >100 J/kg')">Lower Atmos. Severity Index</button>
+        <button id="paramSelect" onclick="changeParam('lhan.gif','Low elevation Haines index')">Low Altitude Haines Index</button>
+        <button id="paramSelect" onclick="changeParam('mhan.gif','Mid elevation Haines index')">Mid Altitude Haines Index</button>
+        <button id="paramSelect" onclick="changeParam('hhan.gif','High elevation Haines index')">High Altitude Haines Index</button>
         
       </div>
 
       
+    </div>
+    <div id="gifSection">
+      <p id="gifTitle">Load GIF Increment</p>
+      <p id="gifTimeTxt2">Start at 12Z</p>
+      <input type="range" style="width: 200px" min="-7" max="23" value="0" id="timeSlider2">
+      <p id="gifTimeTxt3">Forward 0 Hours</p>
+      <input type="range" style="width: 200px" min="-24" max="24" value="0" id="timeSlider3">
+      <button id="loadGif">Load Gif</button>
+      <button id="gifTimeArrow"><</button>
+      <button id="gifTimeArrow" style="left: 660px;">></button>
+      <button id="gifPlay">Play</button>
+      <button id="gifPause">Pause</button>
+      <canvas id="gifButton"></canvas>
     </div>
     <script>
       var slider = document.getElementById("timeSlider");
@@ -176,11 +194,32 @@
       var img = document.getElementById("showimage");
       var displayDate = false;
       var param = "bigsfc.gif";
+      var paramName = "Regional Surface ";
 
-      function changeParam(n){
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+      const cont = document.getElementById("imageCa");
+      const ctx = cont.getContext("2d");
+
+      var slidetime = document.getElementById("timeSlider2");
+      var slidetimeT = document.getElementById("gifTimeTxt2");
+      var slideduration = document.getElementById("timeSlider3");
+      var slidedurationT = document.getElementById("gifTimeTxt3");
+
+      var gifPlaying = true;
+      var gifSpeed = 25;
+      var image = [];
+      var iter = 0;
+
+      const count = document.getElementById("gifButton");
+      const can = count.getContext("2d");
+      
+      function changeParam(n, r){
         param = n;
+        paramName = r;
         loadData();
       }
+
 
       function modifyReal(){
         if (Number(slider.value) + 12 >= 24){
@@ -198,28 +237,41 @@
         }
       }
 
-      function modify(){
-        if (Number(slider.value)+12 >= 24){
-          if (Number(slider.value) - 12 < 10){
-            return "0"+(Number(slider.value) - 12).toString()
+      function modify(val){
+        if (Number(val)+12 >= 24){
+          if (Number(val) - 12 < 10){
+            return "0"+(Number(val) - 12).toString()
           } else {
-            return Number(slider.value) - 12
+            return Number(val) - 12
           }
         } else {
-          if (Number(slider.value) + 12 < 10){
-            return "0"+(Number(slider.value) + 12).toString()
+          if (Number(val) + 12 < 10){
+            return "0"+(Number(val) + 12).toString()
           } else {
-            return Number(slider.value) + 12
+            return Number(val) + 12
           }
         }
       }
       
-      output.innerHTML = modify()+"Z";
+      output.innerHTML = modify(slider.value)+"Z";
 
       slider.oninput = function() {
         loadData();
         
-        output.innerHTML = modify()+"Z";
+        output.innerHTML = modify(slider.value)+"Z";
+      }
+
+      slidetime.oninput = function (){
+        
+        slidetimeT.innerHTML = "Start at "+modify(slidetime.value)+"Z";
+      }
+
+      slideduration.oninput = function(){
+        if (slideduration.value > 0){
+          slidedurationT.innerHTML = "Next "+slideduration.value+" Hours";
+        } else {
+          slidedurationT.innerHTML = "Previous "+(-slideduration.value)+" Hours";
+        }
       }
 
       function leapyear(){
@@ -245,18 +297,14 @@
 
         if (displayDate){
           bt.innerHTML = "Display Date: OFF";
-          var year = document.getElementById("dateYear").value;
-
-          if (year >= 2023){
-            img.style.height = '600px';
-          } else {
-            img.style.height = '675px';
-          }
         } else {
           bt.innerHTML = "Display Date: ON";
-          img.style.height = '750px';
         }
+
+        loadData();
       }
+
+      
 
       function loadData(){
         const base = "https://www.spc.noaa.gov/exper/ma_archive/images_s4/";
@@ -291,10 +339,65 @@
 
         var string = base + year.toString() + month.toString() + day.toString() +"/"+trueHour[0]+"_"+param;
 
-        console.log(string);
 
-        img.src = string;
+        var tempimg = new Image();
+        tempimg.src = string;
+        
+        tempimg.onload = function(){
+          console.log(tempimg.width);
+          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+          ctx.fillStyle = "#e5e5e5";
+          ctx.fillRect(0,0, 1000, 750);
+
+          if (!displayDate){
+            ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+          } else {
+            ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
+
+            if (year < 2023){
+              ctx.fillStyle = "#f6f6f6";
+              ctx.fillRect(0, 700, 1000, 50);
+
+              ctx.fillStyle = "rgb(15, 35, 105)";
+              if (paramName.length > 55){
+                ctx.font = "bold 15px Arial";
+                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+              } else if (paramName.length > 35){
+                ctx.font = "bold 25px Arial";
+                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+              } else {
+                ctx.font = "bold 35px Arial";
+                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+              }
+              
+
+              ctx.font = "bold 15px Arial";
+              ctx.fillText("(+/-1Z)", 950, 740);
+            } else {
+              ctx.fillStyle = "#f6f6f6";
+              ctx.fillRect(0, 675, 1000, 75);
+
+              ctx.fillStyle = "rgb(15, 35, 105)";
+              if (paramName.length > 55){
+                ctx.font = "bold 15px Arial";
+                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+              } else if (paramName.length > 35){
+                ctx.font = "bold 25px Arial";
+                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+              } else {
+                ctx.font = "bold 35px Arial";
+                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+              }
+
+
+              ctx.font = "bold 15px Arial";
+              ctx.fillText("(+/-1Z)", 950, 740);
+            }
+          }
+        }
       }
+
+      
     </script>
   </body>
 </html>
