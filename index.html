@@ -78,29 +78,36 @@
       <input type="range" min="-7" max="23" value="0" id="timeSlider">
       <br>
       <p id="paramSection2">-Parameter Selection-</p>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 50%; width: 20%; top: 23.2%; height: 3% !important; background-color: #484;" onclick="changeParam('sfc','WPC Surface Analysis')">WPC Surface Analysis</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 71%; width: 4%; top: 23.2%; height: 3% !important; background-color: #824;" onclick="changeSFC('in')">+</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 75%; width: 4%; top: 23.2%; height: 3% !important; background-color: #284;" onclick="changeSFC('out')">-</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 81%; width: 4%; top: 23.2%; height: 3% !important; background-color: #828;" onclick="changeSFC('up')">↑</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 85%; width: 4%; top: 23.2%; height: 3% !important; background-color: #282;" onclick="changeSFC('down')">↓</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 91%; width: 4%; top: 23.2%; height: 3% !important; background-color: #828;" onclick="changeSFC('left')">←</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 95%; width: 4%; top: 23.2%; height: 3% !important; background-color: #282;" onclick="changeSFC('right')">→</button>
       <div id="sectionParams">
         <p id="paramSection">Observations/Basic Surface</p>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('bigsfc.gif','Surface Weather Plot')">Regional Surface Chart</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('1kmv.gif','Visual Satellite')">Visual Satellite Image</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlrad.gif','NWS Composite Reflectivity')">Base Reflectivity Mosiac</button>
+        <button id="paramSelect" style="background-color: #248; width:24%;" onclick="changeParam('rgnlrad.gif','NWS Composite Reflectivity')">Base Reflectivity Mosiac</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('rgnlwarn.gif','Watch/Warning Summary')">Watch/Warning Summary</button>
-        <button id="paramSelect" style="width:19%;" onclick="changeParam('pmsl.gif','MSL Pressure and Surface Wind')">MSL Pressure/Wind</button>
-        <button id="paramSelect" style="width:18%;" onclick="changeParam('ttd.gif','Surface Temp, Dewpoint, and pmsl')">T / Td / Wind</button>
-        <button id="paramSelect" style="width:22%;" onclick="changeParam('mcon.gif','Surface Mstr Conv and Mixing Ratio (fill)')">Moisture Convergence</button>
-        <button id="paramSelect" style="width:19%;" onclick="changeParam('thea.gif','Surface Thete-E (fill) / Advection (C/hr)')">ThetaE Advection</button>
-        <button id="paramSelect" style="width:19%;" onclick="changeParam('pchg.gif','2hr sfc pres chg (mb)')">2hr Pres Change</button>
+        <button id="paramSelect" style="background-color: #248; width:19%;" onclick="changeParam('pmsl.gif','MSL Pressure and Surface Wind')">MSL Pressure/Wind</button>
+        <button id="paramSelect" style="width:18%;background-color: #828;" onclick="changeParam('ttd.gif','Surface Temp, Dewpoint, and pmsl')">T / Td / Wind</button>
+        <button id="paramSelect" style="width:22%;background-color: #828;" onclick="changeParam('mcon.gif','Surface Mstr Conv and Mixing Ratio (fill)')">Moisture Convergence</button>
+        <button id="paramSelect" style="width:19%;background-color: #828;" onclick="changeParam('thea.gif','Surface Theta-E (fill) / Advection (C/hr)')">ThetaE Advection</button>
+        <button id="paramSelect" style="width:19%;background-color: #828;" onclick="changeParam('pchg.gif','2hr sfc pres chg (mb)')">2hr Pres Change</button>
         <p id="paramSection">Basic UA/Forcing Fields</p>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('300mb.gif','300mb hght/divergence/wind')">300 mb</button>	
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('500mb.gif','500mb hght/temp/wind')">500 mb</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('700mb.gif','700mb hght/wind/temp/700-500mb mean RH (fill)')">700 mb</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('850mb.gif','850mb hght/temp/dwpt (fill)/wind')">850 mb</button>
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('300mb.gif','300mb hght/divergence/wind')">300 mb</button>	
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('500mb.gif','500mb hght/temp/wind')">500 mb</button>
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('700mb.gif','700mb hght/wind/temp/700-500mb mean RH (fill)')">700 mb</button>
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('850mb.gif','850mb hght/temp/dwpt (fill)/wind')">850 mb</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('alsr.gif','Anvil SR Winds')">Anvil Level SR Winds</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('hlsr.gif','850mb & 500mb Wind Crossover')">9-11km SR Winds</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlsr.gif','Mid Level SR Winds')">4-6km SR Winds</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('llsr.gif','SFC-2km SR Winds')">0-2km SR Winds</button>
-        <button id="paramSelect" onclick="changeParam('dlcp.gif','Deep Layer mstr flux cvgnc and 100mb mean mixing ratio')">Deep Moisture Conv</button>
+        <button id="paramSelect" style="background-color: #248;" onclick="changeParam('dlcp.gif','Deep Layer mstr flux cvgnc and 100mb mean mixing ratio')">Deep Moisture Conv</button>
         <button id="paramSelect" onclick="changeParam('sfnt.gif','SFC Frontogenesis, temp, pres, and wind')">Surface Frontogenesis</button>
-        <button id="paramSelect" onclick="changeParam('tadv.gif','850mb temperature advection (fill - 10e-5 C/s)')">850 mb Temperature Advection</button>
+        <button id="paramSelect" style="background-color: #248;" onclick="changeParam('crit.gif','Critical Angle (fill, deg), 0-1 srh, SBCAPE (J/kg)')">Crit Angle, SRH, SBCAPE (>May 2023)</button>
         <button id="paramSelect" onclick="changeParam('8fnt.gif','850mb Petterssen frontogenesis (fill)')">850 mb Frontogenesis</button>
         <button id="paramSelect" onclick="changeParam('7fnt.gif','700mb Petterssen frontogenesis (fill)')">700 mb Frontogenesis</button>
         <button id="paramSelect" onclick="changeParam('857f.gif','850-700mb mean Petterssen frontogenesis (fill)')">850-700 mb Frontogenesis</button>
@@ -110,30 +117,33 @@
         <button id="paramSelect" onclick="changeParam('ddiv.gif','850mb conv(red), 850mb differential divergence (fill), 250mb divergence (purple)')">850-250 mb Diff. Diverge</button>
         <button id="paramSelect" onclick="changeParam('ageo.gif','300mb isotach (fill), height, ageostrophic wind; 700-500mb layer-ave omega (magenta-up/red-down)')">300 mb Jet Circulation</button>
         <button id="paramSelect" onclick="changeParam('mnwd.gif','850-300mb mean wind (kt)')">850-300mb Mean Wind</button>
+		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('dvvr.gif','Surface Vorticity (fill) and (Divergence) (conv=SOLID red, divg=DASHED blue')">(NEW) Divergence &amp; SFC Vorticity</button>
+		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('tadv.gif','850mb temperature advection (fill - 10e-5 C/s)')">850 mb Temperature Advection</button>
+		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('7tad.gif','700mb temperature advection (fill - 10e-5 C/s)')">700 mb Temp Adv (>May 2023 only)</button>
         <p id="paramSection">Thermodynamic Fields</p>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('sbcp.gif','SBCAPE (contour) and SBCIN (J/kg, shaded >25)')">SBCape / Cin</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlcp.gif','MLCAPE (contour) and MLCIN (J/kg, shaded >25)')">MLCape</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;"onclick="changeParam('mucp.gif','MUCAPE (contour) and lifted parcel level (m AGL, fill)')">MUCape / LPL Height</button>
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('sbcp.gif','SBCAPE (contour) and SBCIN (J/kg, shaded >25)')">SBCape / Cin</button>
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlcp.gif','MLCAPE (contour) and MLCIN (J/kg, shaded >25)')">MLCape</button>
+        <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;"onclick="changeParam('mucp.gif','MUCAPE (contour) and lifted parcel level (m AGL, fill)')">MUCape / LPL Height</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('muli.gif','SBLI (500mb) and SBCIN (J/kg, shaded >25)')">SB Lifted Index / CINH</button>
-        <button id="paramSelect" onclick="changeParam('laps.gif','700-500mb LR (Mid Level)')">Mid Level Lapse Rates</button>
-        <button id="paramSelect" onclick="changeParam('lllr.gif','0-3km LR (Low Level)')">Low Level Lapse Rates</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('laps.gif','700-500mb LR (Mid Level)')">Mid Level Lapse Rates</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('lllr.gif','0-3km LR (Low Level)')">Low Level Lapse Rates</button>
         <button id="paramSelect" onclick="changeParam('ncap.gif','Normalized Cape')">Normalized Cape</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('dcape.gif','DCAPE (downdraft)')">Downdraft Cape</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif','100mb mean Parcel LFC height (m AGL)')">LFC Height</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif','100mb mean Parcel LCL height (m AGL)')">LCL Height</button>
+        <button id="paramSelect" style="background-color: #248; width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif','100mb mean Parcel LFC height (m AGL)')">LFC Height</button>
+        <button id="paramSelect" style="background-color: #248; width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif','100mb mean Parcel LCL height (m AGL)')">LCL Height</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfrh.gif','LCL-LFC mean RH (fill), MUCape >100 (contour)')">LCL - LFC RH</button>
         <p id="paramSection">Wind Shear</p>
-        <button id="paramSelect" onclick="changeParam('xover.gif','850mb & 500mb Wind Crossover')">850 &amp; 500 mb winds</button>
-        <button id="paramSelect" onclick="changeParam('eshr.gif','Effective bulk Shear (kt)')">Effective Shear</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('xover.gif','850mb & 500mb Wind Crossover')">850 &amp; 500 mb winds</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('eshr.gif','Effective bulk Shear (kt)')">Effective Shear</button>
         <button id="paramSelect" onclick="changeParam('brns.gif','Bulk-Richardson Number Shear (BRN)')">BRN Shear</button>
-        <button id="paramSelect" onclick="changeParam('srh1.gif','0-1km SRH (m2/s2) and storm motion (kt)')">0-1km SR Helicity</button>
-        <button id="paramSelect" onclick="changeParam('srh3.gif','0-3km SRH (m2/s2) and storm motion (kt)')">0-3km SR Helicity</button>
-        <button id="paramSelect" onclick="changeParam('effh.gif','Eff. Inflow Base (fill, m AGL), ESRH (m2/s2), storm motion (kt)')">Effective SR Helicity</button>
+        <button id="paramSelect" style="background-color: #248;" onclick="changeParam('srh1.gif','0-1km SRH (m2/s2) and storm motion (kt)')">0-1km SR Helicity</button>
+        <button id="paramSelect" style="background-color: #248;" onclick="changeParam('srh3.gif','0-3km SRH (m2/s2) and storm motion (kt)')">0-3km SR Helicity</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('effh.gif','Eff. Inflow Base (fill, m AGL), ESRH (m2/s2), storm motion (kt)')">Effective SR Helicity</button>
         <button id="paramSelect" onclick="changeParam('shr1.gif','SFC-1km shear Vector')">0-1km Shear Vector</button>
         <button id="paramSelect" onclick="changeParam('shr6.gif','SFC-6km shear Vector')">0-6km Shear Vector</button>
         <button id="paramSelect" onclick="changeParam('shr8.gif','SFC-8km shear Vector')">0-8km Shear Vector</button>
         <p id="paramSection">Composite Indices</p>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('scp.gif','Supercell Composite (eff layer) and Bunkers storm motion (kt)')">Supercell Composite</button>
+        <button id="paramSelect" style="background-color: #248;width:24%;" onclick="changeParam('scp.gif','Supercell Composite (eff layer) and Bunkers storm motion (kt)')">Supercell Composite</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('lscp.gif','Left-moving Supercell Composite (eff layer) and Bunkers left storm motion (kt)')">Left-Moving SCP</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('stor.gif','Significant Tornado Param (fixed layer), MLCIN (J/kg, shaded >25)')">Fixed Layer STP</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('stpc.gif','Significant Tornado Param (eff layer), MLCIN (J/kg, shaded >25)')">Effective Layer STP</button>
@@ -149,12 +159,12 @@
         <button id="paramSelect" style="width:24%;"onclick="changeParam('comp.gif','850mb & 500mb Wind Crossver and MULI (fill)')">MULI, 850 &amp; 500 mb winds</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('lcls.gif','LCL height (fill), 0-1km srh (contour)')">LCL hght/0-1 km SRH</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('lr3c.gif','0-3km LR (fill) and 0-3km MLCAPE (red)')">LL Lapse Rates/3Cape (ML)</button>
-        <button id="paramSelect" onclick="changeParam('3cvr.gif','0-3km MLCAPE and Surface Vorticity')">3Cape (ML) &amp; Sfc Vorticity</button>
-        <button id="paramSelect" onclick="changeParam('tdlr.gif','SFC Dewpoint (fill),700-500mb LR (Mid Level)')">SFC Dewpt/700-500 mb LR</button>
-        <button id="paramSelect" onclick="changeParam('hail.gif','Hail Parameter {Cape -10>-30C (red), frzg level (m), 0-6km shear (kt)}')">Hail Parameters</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('3cvr.gif','0-3km MLCAPE and Surface Vorticity')">3Cape (ML) &amp; Sfc Vorticity</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('tdlr.gif','SFC Dewpoint (fill),700-500mb LR (Mid Level)')">SFC Dewpt/700-500 mb LR</button>
+        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('hail.gif','Hail Parameter {Cape -10>-30C (red), frzg level (m), 0-6km shear (kt)}')">Hail Parameters</button>
         <p id="paramSection">Misc. Fields</p>
-        <button id="paramSelect" style="width:24%;"  onclick="changeParam('pwtr.gif','Precipitable water (in) lowest 400mb')">PWAT (Precip. Water)</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('tran.gif','850mb Moisture transport (fill/vector), 850mb height/theta-e')">850 mb Moisture Transport</button>
+        <button id="paramSelect" style="background-color: #248; width:24%;"  onclick="changeParam('pwtr.gif','Precipitable water (in) lowest 400mb')">PWAT (Precip. Water)</button>
+        <button id="paramSelect" style="background-color: #248; width:24%;" onclick="changeParam('tran.gif','850mb Moisture transport (fill/vector), 850mb height/theta-e')">850 mb Moisture Transport</button>
         <button id="paramSelect" style="width:24%;"onclick="changeParam('prop.gif','precipitable water (fill), upwind propagation vectors, 1000-500mb thickness')">Upwind Propagation Vector</button>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('swbt.gif','Near freezing surface wet bulb temperatures, pres, and wind')">Surface Wet Bulb Temperature</button>
         
@@ -195,6 +205,9 @@
       var displayDate = false;
       var param = "bigsfc.gif";
       var paramName = "Regional Surface ";
+	  
+	  
+	  const clamp = (min, val, max) => Math.min(Math.max(min, val), max)
 
       const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -304,97 +317,204 @@
         loadData();
       }
 
-      
+      var bgImg = new Image();
+	  bgImg.src = "https://www.wpc.ncep.noaa.gov/archives/web_pages/sfc/NAmap-topo+.png";
+	  
+	  function changeSFC(n){
+		if (n == 'in'){
+			zoom = clamp(zoomlim.min, zoom - zoomlim.step, zoomlim.max);
+		} else if (n == 'out'){
+			zoom = clamp(zoomlim.min, zoom + zoomlim.step, zoomlim.max);
+		}
+		
+		if (n == 'left'){
+			pos.x = clamp(poslim.x.min, pos.x - poslim.x.step, poslim.x.max);
+		} else if (n == 'right'){
+			pos.x = clamp(poslim.x.min, pos.x + poslim.x.step, poslim.x.max);
+		}
+		
+		if (n == 'up'){
+			pos.y = clamp(poslim.y.min, pos.y - poslim.y.step, poslim.y.max);
+		} else if (n == 'down'){
+			pos.y = clamp(poslim.y.min, pos.y + poslim.y.step, poslim.y.max);
+		}
+		
+		loadData();
+	  }
+	  
+	  var zoom = 1500;
+	  var pos = {x:1200, y:1200};
+	  
+	  var zoomlim = {max:2000, min: 200, step: 100};
+	  var poslim = {x:{max:3000, min: 500, step: 100},y:{max:3000, min: 500, step: 100}};
 
       function loadData(){
-        const base = "https://www.spc.noaa.gov/exper/ma_archive/images_s4/";
-        var year = document.getElementById("dateYear").value;
-        var month = Number(document.getElementById("dateMonth").value);
-        var day = Number(document.getElementById("dateDay").value);
-        var hour = slider.value;
-        
+		if (param == "sfc"){
+			const base = "https://www.wpc.ncep.noaa.gov/archives/sfc/";
+			const base2 = "/lrgnamsfc";
+			
+			var trueHour = modifyReal();
+			
+			var year = document.getElementById("dateYear").value;
+			var month = Number(document.getElementById("dateMonth").value);
+			var day = Number(document.getElementById("dateDay").value);
+			var hour = slider.value;
+			
+			if (trueHour[1] == 1){
+			  day += 1;
 
-        var trueHour = modifyReal();
+			  if ((day > 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day > 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
+				month += 1;
+				day = 0;
+			  }
+			}
 
-        if (trueHour[1] == 1){
-          day += 1;
+			//if (trueHour < 10){
+			//  trueHour = "0"+trueHour;
+		   // }
 
-          if ((day > 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day > 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
-            month += 1;
-            day = 0;
-          }
-        }
+			if (day < 10){
+			  day = "0"+day;
+			}
 
-        //if (trueHour < 10){
-        //  trueHour = "0"+trueHour;
-       // }
+			if (month < 10){
+			  month = "0"+month;
+			}
 
-        if (day < 10){
-          day = "0"+day;
-        }
-
-        if (month < 10){
-          month = "0"+month;
-        }
-
-        var string = base + year.toString() + month.toString() + day.toString() +"/"+trueHour[0]+"_"+param;
-
-
-        var tempimg = new Image();
-        tempimg.src = string;
-        
-        tempimg.onload = function(){
-          console.log(tempimg.width);
-          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
-          ctx.fillStyle = "#e5e5e5";
-          ctx.fillRect(0,0, 1000, 750);
-
-          if (!displayDate){
-            ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
-          } else {
-            ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
-
-            if (year < 2023){
-              ctx.fillStyle = "#f6f6f6";
-              ctx.fillRect(0, 700, 1000, 50);
-
-              ctx.fillStyle = "rgb(15, 35, 105)";
-              if (paramName.length > 55){
-                ctx.font = "bold 15px Arial";
-                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-              } else if (paramName.length > 35){
-                ctx.font = "bold 25px Arial";
-                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-              } else {
-                ctx.font = "bold 35px Arial";
-                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-              }
-              
-
-              ctx.font = "bold 15px Arial";
-              ctx.fillText("(+/-1Z)", 950, 740);
-            } else {
-              ctx.fillStyle = "#f6f6f6";
-              ctx.fillRect(0, 675, 1000, 75);
-
-              ctx.fillStyle = "rgb(15, 35, 105)";
-              if (paramName.length > 55){
-                ctx.font = "bold 15px Arial";
-                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-              } else if (paramName.length > 35){
-                ctx.font = "bold 25px Arial";
-                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-              } else {
-                ctx.font = "bold 35px Arial";
-                ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-              }
+			var string = base + year.toString() + base2 + year.toString() + month.toString() + day.toString() + trueHour[0]+".gif";
 
 
-              ctx.font = "bold 15px Arial";
-              ctx.fillText("(+/-1Z)", 950, 740);
-            }
-          }
-        }
+			var tempimg = new Image();
+			tempimg.src = string;
+			
+			tempimg.onload = function(){
+			  ctx.drawImage(bgImg, pos.x, pos.y, zoom, zoom * 0.75, 0, 0, 1000, 750);
+			  ctx.globalAlpha = 0.666;
+			  ctx.drawImage(tempimg, pos.x, pos.y, zoom, zoom * 0.75, 0, 0, 1000, 750);
+			  ctx.globalAlpha = 1;
+			  
+			  if (!displayDate){
+				//ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+			  } else {
+				//ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
+				var num = Math.round(modify(slider.value)/3) * 3;
+				
+				if (year <= 2005 && month < 5){
+				  ctx.fillStyle = "#f6f6f6";
+				  ctx.fillRect(0, 700, 1000, 50);
+					
+				  ctx.fillStyle = "rgb(15, 35, 105)";
+
+				  ctx.font = "bold 35px Arial";
+				  ctx.fillText(num+"Z - "+paramName, 50, 740);
+				  
+
+				  ctx.font = "bold 15px Arial";
+				  ctx.fillText("(+/-1Z)", 950, 740);
+				} else {
+				  ctx.fillStyle = "#f6f6f6";
+				  ctx.fillRect(0, 675, 1000, 75);
+
+				  ctx.fillStyle = "rgb(15, 35, 105)";
+				  ctx.font = "bold 35px Arial";
+				  ctx.fillText(num+"Z - "+paramName, 50, 740);
+
+
+				  ctx.font = "bold 15px Arial";
+				  ctx.fillText("(+/-1Z)", 950, 740);
+				}
+			  }
+			}
+		} else {
+			const base = "https://www.spc.noaa.gov/exper/ma_archive/images_s4/";
+			var year = document.getElementById("dateYear").value;
+			var month = Number(document.getElementById("dateMonth").value);
+			var day = Number(document.getElementById("dateDay").value);
+			var hour = slider.value;
+			
+
+			var trueHour = modifyReal();
+
+			if (trueHour[1] == 1){
+			  day += 1;
+
+			  if ((day > 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day > 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
+				month += 1;
+				day = 0;
+			  }
+			}
+
+			//if (trueHour < 10){
+			//  trueHour = "0"+trueHour;
+		   // }
+
+			if (day < 10){
+			  day = "0"+day;
+			}
+
+			if (month < 10){
+			  month = "0"+month;
+			}
+
+			var string = base + year.toString() + month.toString() + day.toString() +"/"+trueHour[0]+"_"+param;
+
+
+			var tempimg = new Image();
+			tempimg.src = string;
+			
+			tempimg.onload = function(){
+			  console.log(tempimg.width);
+			  //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+			  ctx.fillStyle = "#e5e5e5";
+			  ctx.fillRect(0,0, 1000, 750);
+
+			  if (!displayDate){
+				ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+			  } else {
+				ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
+
+				if (year < 2023){
+				  ctx.fillStyle = "#f6f6f6";
+				  ctx.fillRect(0, 700, 1000, 50);
+
+				  ctx.fillStyle = "rgb(15, 35, 105)";
+				  if (paramName.length > 55){
+					ctx.font = "bold 15px Arial";
+					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+				  } else if (paramName.length > 35){
+					ctx.font = "bold 25px Arial";
+					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+				  } else {
+					ctx.font = "bold 35px Arial";
+					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+				  }
+				  
+
+				  ctx.font = "bold 15px Arial";
+				  ctx.fillText("(+/-1Z)", 950, 740);
+				} else {
+				  ctx.fillStyle = "#f6f6f6";
+				  ctx.fillRect(0, 675, 1000, 75);
+
+				  ctx.fillStyle = "rgb(15, 35, 105)";
+				  if (paramName.length > 55){
+					ctx.font = "bold 15px Arial";
+					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+				  } else if (paramName.length > 35){
+					ctx.font = "bold 25px Arial";
+					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+				  } else {
+					ctx.font = "bold 35px Arial";
+					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+				  }
+
+
+				  ctx.font = "bold 15px Arial";
+				  ctx.fillText("(+/-1Z)", 950, 740);
+				}
+			  }
+			}
+		}
       }
 
       
