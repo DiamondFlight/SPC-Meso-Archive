@@ -1,5 +1,5 @@
 html, body {
-  height: 100%;
+  height: 110%;
   width: 100%;
   margin: 0px;
   background-color: #000000;
@@ -29,6 +29,25 @@ div#dropdowns{
   height: 50px;
 }
 
+#outlookHR, #outlookTYP {
+  color: #000;
+  font: Sans-Serif;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 1px;
+  width: 20%;
+  height: 30px;
+
+  right: 65%;
+  display: inline-flex;
+  position: absolute;
+  text-align: center;
+}
+
+#outlookTYP {
+  right: 45%;
+}
+
 #BASICPARAMS {
   color: #000;
   font: Sans-Serif;
@@ -49,13 +68,45 @@ div#dropdowns{
   height: 50px;
 }
 
-#loadButton,#displayButton {
+#loadButton {
   color: #dd3c3c;
   font-family: Sans-Serif;
   font-size: 25px;
   font-weight: 800;
   padding: 5px 5px 5px 5px;
   width: 50%;
+  height: 50px;
+}
+
+#reportsShow, #outlookShow {
+  color: #ffffff;
+  background-color: #880000;
+  font-family: Sans-Serif;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 5px 5px 5px 5px;
+  width: 20%;
+  height: 30px;
+  right: 1%;
+  display: inline-flex;
+  position: absolute;
+  text-align: center;
+}
+
+#outlookShow {
+  right: 22.5%;
+}
+
+#displayButton, #displayButton2{
+  color: #dd3c3c;
+  font-family: Sans-Serif;
+  font-size: 20px;
+  font-weight: 800;
+  display: inline-flex;
+  position: absolute;
+  padding: 5px 5px 5px 5px;
+  width: 45%;
+  right: 0;
   height: 50px;
 }
 

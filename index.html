@@ -11,8 +11,9 @@
   </head>
   
   <body onload="loadData()" style="background-color: #765b76;">
-    <p style="position:fixed; left:390px; top: 0px; background-color: #e5e5e5; font-size: 20px; font-weight: 850px; font-family: monospace;">Some of the Images will be 1 hour<br> behind because of how they are<br> stored in the noaa database</p>
+    <!--<p style="position:fixed; left:390px; top: 0px; background-color: #e5e5e5; font-size: 20px; font-weight: 850px; font-family: monospace;">Some of the Images will be 1 hour<br> behind because of how they are<br> stored in the noaa database</p>-->
     <canvas id="imageCa" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5"></canvas>
+    <!--<canvas id="imageCaSound" width="1000px" height="450px" style="position:absolute;left:850px;top:775px;background-color: #e5e5e5"></canvas>-->
     <!--<img id="showimage" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5;object-fit: cover;">-->
     <div id="showimagebg" width="1000px" height="750px" style="position:absolute;left:500px;top:20px;background-color: #e5e5e5;object-fit: cover;"></div>
     <div id="dropdowns">
@@ -71,20 +72,49 @@
         <option value="30">30</option>
         <option value="31">31</option>
       </select>
-      <button onclick="switchDisplayDate()" id="displayButton">Display Date: ON</button>
+
+      <button onclick="switchDisplayDate()" id="displayButton">Display Canvas Date: ON</button>
+      <button onclick="hideAllDates()" id="displayButton2" style="top:55px">Display Date Selection: ON</button>
+      <button onclick="randomizeDate()" id="displayButton2" style="top:10px">Randomize Date</button>
       <br>
       <hr \>
+      <button id="reportsShow" onclick="showReports()">Show Reports</button>
+      <button id="outlookShow" onclick="showOutlook()">Show Outlook</button>
+
+      <select name="OUTLOOKTIME" id="outlookHR">
+        <option value="1200" selected="selected">06:00Z</option>
+        <option value="1300">13:00Z</option>
+        <option value="1630">16:30Z</option>
+        <option value="2000">20:00Z</option>
+        <option value="0100">01:00Z</option>
+      </select>
+
+      <select name="OUTLOOKTYPE" id="outlookTYP">
+        <option value="prt" selected="selected">Convective</option>
+        <option value="torn">Tornado</option>
+        <option value="wind">Wind</option>
+        <option value="hail">Hail</option>
+      </select>
+
+      <label for="OFFICES" id="textSounding" style="visibility: hidden; position: absolute;">Choose Sounding Office </label>
+      <select name="OFFICES" id="offices" style="visibility: hidden;  position: absolute;">
+        <option value="prt" selected="selected">Convective</option>
+        <option value="torn_prt">Tornado</option>
+        <option value="wind_prt">Wind</option>
+        <option value="hail_prt">Hail</option>
+      </select>
+
       <p id="timeSliderTxt">12Z</p>
       <input type="range" min="-7" max="23" value="0" id="timeSlider">
       <br>
       <p id="paramSection2">-Parameter Selection-</p>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 50%; width: 20%; top: 23.2%; height: 3% !important; background-color: #484;" onclick="changeParam('sfc','WPC Surface Analysis')">WPC Surface Analysis</button>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 71%; width: 4%; top: 23.2%; height: 3% !important; background-color: #824;" onclick="changeSFC('in')">+</button>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 75%; width: 4%; top: 23.2%; height: 3% !important; background-color: #284;" onclick="changeSFC('out')">-</button>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 81%; width: 4%; top: 23.2%; height: 3% !important; background-color: #828;" onclick="changeSFC('up')">↑</button>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 85%; width: 4%; top: 23.2%; height: 3% !important; background-color: #282;" onclick="changeSFC('down')">↓</button>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 91%; width: 4%; top: 23.2%; height: 3% !important; background-color: #828;" onclick="changeSFC('left')">←</button>
-	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 95%; width: 4%; top: 23.2%; height: 3% !important; background-color: #282;" onclick="changeSFC('right')">→</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 50%; width: 20%; top: 20%; height: 3% !important; background-color: #484;" onclick="changeParam('sfc','WPC Surface Analysis')">WPC Surface Analysis</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 71%; width: 4%; top: 20%; height: 3% !important; background-color: #824;" onclick="changeSFC('in')">+</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 75%; width: 4%; top: 20%; height: 3% !important; background-color: #284;" onclick="changeSFC('out')">-</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 81%; width: 4%; top: 20%; height: 3% !important; background-color: #828;" onclick="changeSFC('up')">↑</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 85%; width: 4%; top: 20%; height: 3% !important; background-color: #282;" onclick="changeSFC('down')">↓</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 91%; width: 4%; top: 20%; height: 3% !important; background-color: #828;" onclick="changeSFC('left')">←</button>
+	  <button id="paramSelect" style="width:24%; justify-items: right; position:absolute; left: 95%; width: 4%; top: 20%; height: 3% !important; background-color: #282;" onclick="changeSFC('right')">→</button>
       <div id="sectionParams">
         <p id="paramSection">Observations/Basic Surface</p>
         <button id="paramSelect" style="width:24%;" onclick="changeParam('bigsfc.gif','Surface Weather Plot')">Regional Surface Chart</button>
@@ -185,6 +215,90 @@
 
       
     </div>
+	
+	//https://www.spc.noaa.gov/exper/archive/events/20120302/soundings/12030212_SNDG/sndgmap.gif
+	
+	<map name="stations">
+       <area shape="circle" coords="136,103,5" href="javascript:show_soundings(&quot;LMN&quot;)" alt="LMN">
+       <area shape="circle" coords="47,10,5" href="javascript:show_soundings(&quot;YLW&quot;)" alt="YLW">
+       <area shape="circle" coords="165,11,5" href="javascript:show_soundings(&quot;WPL&quot;)" alt="WPL">
+       <area shape="circle" coords="204,6,5" href="javascript:show_soundings(&quot;YMO&quot;)" alt="YMO">
+       <area shape="circle" coords="230,33,5" href="javascript:show_soundings(&quot;WMW&quot;)" alt="WMW">
+       <area shape="circle" coords="275,36,5" href="javascript:show_soundings(&quot;YQI&quot;)" alt="YQI">
+       <area shape="circle" coords="157,101,5" href="javascript:show_soundings(&quot;SGF&quot;)" alt="SGF">
+       <area shape="circle" coords="164,117,5" href="javascript:show_soundings(&quot;LZK&quot;)" alt="LZK">
+       <area shape="circle" coords="138,129,5" href="javascript:show_soundings(&quot;FWD&quot;)" alt="FWD">
+       <area shape="circle" coords="137,173,5" href="javascript:show_soundings(&quot;BRO&quot;)" alt="BRO">
+       <area shape="circle" coords="138,160,5" href="javascript:show_soundings(&quot;CRP&quot;)" alt="CRP">
+       <area shape="circle" coords="160,146,5" href="javascript:show_soundings(&quot;LCH&quot;)" alt="LCH">
+       <area shape="circle" coords="110,58,5" href="javascript:show_soundings(&quot;RAP&quot;)" alt="RAP">
+       <area shape="circle" coords="131,50,5" href="javascript:show_soundings(&quot;ABR&quot;)" alt="ABR">
+       <area shape="circle" coords="122,41,5" href="javascript:show_soundings(&quot;BIS&quot;)" alt="BIS">
+       <area shape="circle" coords="98,30,5" href="javascript:show_soundings(&quot;GGW&quot;)" alt="GGW">
+       <area shape="circle" coords="77,33,5" href="javascript:show_soundings(&quot;TFX&quot;)" alt="TFX">
+       <area shape="circle" coords="154,52,5" href="javascript:show_soundings(&quot;MPX&quot;)" alt="MPX">
+       <area shape="circle" coords="168,72,5" href="javascript:show_soundings(&quot;DVN&quot;)" alt="DVN">
+       <area shape="circle" coords="176,80,5" href="javascript:show_soundings(&quot;ILX&quot;)" alt="ILX">
+       <area shape="circle" coords="178,143,5" href="javascript:show_soundings(&quot;LIX&quot;)" alt="LIX">
+       <area shape="circle" coords="125,98,5" href="javascript:show_soundings(&quot;DDC&quot;)" alt="DDC">
+       <area shape="circle" coords="116,114,5" href="javascript:show_soundings(&quot;AMA&quot;)" alt="AMA">
+       <area shape="circle" coords="113,135,5" href="javascript:show_soundings(&quot;MAF&quot;)" alt="MAF">
+       <area shape="circle" coords="157,131,5" href="javascript:show_soundings(&quot;SHV&quot;)" alt="SHV">
+       <area shape="circle" coords="101,85,5" href="javascript:show_soundings(&quot;DNR&quot;)" alt="DNR">
+       <area shape="circle" coords="176,131,5" href="javascript:show_soundings(&quot;JAN&quot;)" alt="JAN">
+       <area shape="circle" coords="193,123,5" href="javascript:show_soundings(&quot;BMX&quot;)" alt="BMX">
+       <area shape="circle" coords="191,104,5" href="javascript:show_soundings(&quot;BNA&quot;)" alt="BNA">
+       <area shape="circle" coords="202,83,5" href="javascript:show_soundings(&quot;ILN&quot;)" alt="ILN">
+       <area shape="circle" coords="202,63,5" href="javascript:show_soundings(&quot;DTX&quot;)" alt="DTX">
+       <area shape="circle" coords="194,49,5" href="javascript:show_soundings(&quot;APX&quot;)" alt="APX">
+       <area shape="circle" coords="178,52,5" href="javascript:show_soundings(&quot;GRB&quot;)" alt="GRB">
+       <area shape="circle" coords="225,101,5" href="javascript:show_soundings(&quot;GSO&quot;)" alt="GSO">
+       <area shape="circle" coords="233,79,5" href="javascript:show_soundings(&quot;IAD&quot;)" alt="IAD">
+       <area shape="circle" coords="153,29,5" href="javascript:show_soundings(&quot;INL&quot;)" alt="INL">
+       <area shape="circle" coords="209,140,5" href="javascript:show_soundings(&quot;TLH&quot;)" alt="TLH">
+       <area shape="circle" coords="205,120,5" href="javascript:show_soundings(&quot;FFC&quot;)" alt="FFC">
+       <area shape="circle" coords="229,173,5" href="javascript:show_soundings(&quot;KEY&quot;)" alt="KEY">
+       <area shape="circle" coords="234,164,5" href="javascript:show_soundings(&quot;MFL&quot;)" alt="MFL">
+       <area shape="circle" coords="221,154,5" href="javascript:show_soundings(&quot;TBW&quot;)" alt="TBW">
+       <area shape="circle" coords="222,136,5" href="javascript:show_soundings(&quot;JAX&quot;)" alt="JAX">
+       <area shape="circle" coords="228,119,5" href="javascript:show_soundings(&quot;CHS&quot;)" alt="CHS">
+       <area shape="circle" coords="241,104,5" href="javascript:show_soundings(&quot;MHX&quot;)" alt="MHX">
+       <area shape="circle" coords="221,93,5" href="javascript:show_soundings(&quot;RNK&quot;)" alt="RNK">
+       <area shape="circle" coords="218,73,5" href="javascript:show_soundings(&quot;PIT&quot;)" alt="PIT">
+       <area shape="circle" coords="222,57,5" href="javascript:show_soundings(&quot;BUF&quot;)" alt="BUF">
+       <area shape="circle" coords="244,83,5" href="javascript:show_soundings(&quot;WAL&quot;)" alt="WAL">
+       <area shape="circle" coords="252,62,5" href="javascript:show_soundings(&quot;OKX&quot;)" alt="OKX">
+       <area shape="circle" coords="244,52,5" href="javascript:show_soundings(&quot;ALB&quot;)" alt="ALB">
+       <area shape="circle" coords="263,54,5" href="javascript:show_soundings(&quot;CHH&quot;)" alt="CHH">
+       <area shape="circle" coords="257,40,5" href="javascript:show_soundings(&quot;GYX&quot;)" alt="GYX">
+       <area shape="circle" coords="261,21,5" href="javascript:show_soundings(&quot;CAR&quot;)" alt="CAR">
+       <area shape="circle" coords="66,128,5" href="javascript:show_soundings(&quot;TUS&quot;)" alt="TUS">
+       <area shape="circle" coords="65,109,5" href="javascript:show_soundings(&quot;FGZ&quot;)" alt="FGZ">
+       <area shape="circle" coords="35,119,5" href="javascript:show_soundings(&quot;NKX&quot;)" alt="NKX">
+       <area shape="circle" coords="20,104,5" href="javascript:show_soundings(&quot;VBG&quot;)" alt="VBG">
+       <area shape="circle" coords="16,83,5" href="javascript:show_soundings(&quot;OAK&quot;)" alt="OAK">
+       <area shape="circle" coords="30,74,5" href="javascript:show_soundings(&quot;REV&quot;)" alt="REV">
+       <area shape="circle" coords="21,55,5" href="javascript:show_soundings(&quot;MFR&quot;)" alt="MFR">
+       <area shape="circle" coords="25,38,5" href="javascript:show_soundings(&quot;SLE&quot;)" alt="SLE">
+       <area shape="circle" coords="50,26,5" href="javascript:show_soundings(&quot;OTX&quot;)" alt="OTX">
+       <area shape="circle" coords="23,18,5" href="javascript:show_soundings(&quot;UIL&quot;)" alt="UIL">
+       <area shape="circle" coords="145,90,5" href="javascript:show_soundings(&quot;TOP&quot;)" alt="TOP">
+       <area shape="circle" coords="90,113,5" href="javascript:show_soundings(&quot;ABQ&quot;)" alt="ABQ">
+       <area shape="circle" coords="88,133,5" href="javascript:show_soundings(&quot;EPZ&quot;)" alt="EPZ">
+       <area shape="circle" coords="122,77,5" href="javascript:show_soundings(&quot;LBF&quot;)" alt="LBF">
+       <area shape="circle" coords="142,76,5" href="javascript:show_soundings(&quot;OAX&quot;)" alt="OAX">
+       <area shape="circle" coords="69,74,5" href="javascript:show_soundings(&quot;SLC&quot;)" alt="SLC">
+       <area shape="circle" coords="52,53,5" href="javascript:show_soundings(&quot;BOI&quot;)" alt="BOI">
+       <area shape="circle" coords="52,71,5" href="javascript:show_soundings(&quot;LKN&quot;)" alt="LKN">
+       <area shape="circle" coords="86,62,5" href="javascript:show_soundings(&quot;RIW&quot;)" alt="RIW">
+       <area shape="circle" coords="84,87,5" href="javascript:show_soundings(&quot;GJT&quot;)" alt="GJT">
+       <area shape="circle" coords="119,151,5" href="javascript:show_soundings(&quot;DRT&quot;)" alt="DRT">
+       <area shape="circle" coords="230,149,5" href="javascript:show_soundings(&quot;XMR&quot;)" alt="XMR">
+       <area shape="circle" coords="137,114,5" href="javascript:show_soundings(&quot;OUN&quot;)" alt="OUN">
+       <area shape="circle" coords="193,113,5" href="javascript:show_soundings(&quot;QAG&quot;)" alt="QAG">
+
+</map>
+	
     <div id="gifSection">
       <p id="gifTitle">Load GIF Increment</p>
       <p id="gifTimeTxt2">Start at 12Z</p>
@@ -203,16 +317,21 @@
       var output = document.getElementById("timeSliderTxt");
       var img = document.getElementById("showimage");
       var displayDate = false;
+      var displayRealDate = false;
       var param = "bigsfc.gif";
       var paramName = "Regional Surface ";
+      
 	  
 	  
-	  const clamp = (min, val, max) => Math.min(Math.max(min, val), max)
+	    const clamp = (min, val, max) => Math.min(Math.max(min, val), max)
 
       const sleep = ms => new Promise(r => setTimeout(r, ms));
 
       const cont = document.getElementById("imageCa");
       const ctx = cont.getContext("2d");
+
+      //const cont2 = document.getElementById("imageCaSound");
+      //const ctxs = cont2.getContext("2d");
 
       var slidetime = document.getElementById("timeSlider2");
       var slidetimeT = document.getElementById("gifTimeTxt2");
@@ -223,6 +342,8 @@
       var gifSpeed = 25;
       var image = [];
       var iter = 0;
+
+      var outlkType = "wind_prt";
 
       const count = document.getElementById("gifButton");
       const can = count.getContext("2d");
@@ -249,6 +370,8 @@
           }
         }
       }
+	  
+	  //https://www.spc.noaa.gov/exper/archive/events/20120302/soundings/12030212_SNDG/LZK.gif
 
       function modify(val){
         if (Number(val)+12 >= 24){
@@ -265,6 +388,39 @@
           }
         }
       }
+
+      function load_soundings(){
+        var indx = "https://www.spc.noaa.gov/exper/archive/events/20240901/soundings/24090112_SNDG/sndgmap.gif";
+        var snd = "https://www.spc.noaa.gov/exper/archive/events/20240901/soundings/24090112_SNDG/last.gif";
+
+        var tempimg = new Image();
+        tempimg.src = indx;
+
+        var tempso = new Image();
+        tempso.src = snd;
+        
+        tempimg.onload = function(){
+          console.log(tempimg.width);
+          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+          ctxs.fillStyle = "#e5e5e5";
+          ctxs.fillRect(0,0, 1000, 750);
+
+          ctxs.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,280,210);
+          ctxs.fillRect(0,190, 280, 20);
+
+          
+			  }
+
+        tempso.onload = function(){
+          ctxs.fillStyle = "#ffffff";
+          ctxs.fillRect(280,0, 700,450);
+          ctxs.drawImage(tempso, 0, 0, tempso.width, tempso.height, 300,0,700,450);
+        }
+      }
+
+      function show_soundings(){
+        console.log("CLICKED");
+      }
       
       output.innerHTML = modify(slider.value)+"Z";
 
@@ -273,6 +429,14 @@
         
         output.innerHTML = modify(slider.value)+"Z";
       }
+
+      //document.getElementById("outlookHR").oninput = function() {
+      //  showOutlook();
+      //}
+
+      //document.getElementById("outlookTYP").oninput = function() {
+      //  showOutlook();
+      //}
 
       slidetime.oninput = function (){
         
@@ -304,10 +468,171 @@
         }
       }
 
+      function hideAllDates(){
+        var dY = document.getElementById("dateYear");
+        var dM = document.getElementById("dateMonth");
+        var dD = document.getElementById("dateDay");
+
+        var bt = document.getElementById("displayButton2");
+
+        displayRealDate = !displayRealDate;
+
+        if (displayRealDate) {
+          bt.innerHTML = "Display Date Selection:: OFF";
+          dY.style.visibility = "hidden";
+          dM.style.visibility = "hidden";
+          dD.style.visibility = "hidden";
+        } else {
+          bt.innerHTML = "Display Date Selection:: ON";
+          dY.style.visibility = "visible";
+          dM.style.visibility = "visible";
+          dD.style.visibility = "visible";
+        }
+      }
+
+      function randomizeDate(){
+        var YearRand = Math.floor(Math.random() * (document.getElementById("dateYear").options.length -1))+1;
+        var MonthRand = Math.floor(Math.random() * (document.getElementById("dateMonth").options.length -1))+1;
+        var DayRand = Math.floor(Math.random() * (document.getElementById("dateDay").options.length -1))+1;
+
+        document.getElementById("dateYear").options.selectedIndex = YearRand;
+        document.getElementById("dateMonth").options.selectedIndex = MonthRand;
+        document.getElementById("dateDay").options.selectedIndex = DayRand;
+
+        param="300mb.gif";
+        paramName="300mb hght/divergence/wind";
+
+        loadData();
+      }
+
+      function showOutlook(){
+        var Sub = "https://www.spc.noaa.gov/products/outlook/archive/";
+        var NewSub = "https://www.spc.noaa.gov/products/outlook/archive/";
+
+        var year = document.getElementById("dateYear").value;
+        var month = Number(document.getElementById("dateMonth").value);
+        var day = Number(document.getElementById("dateDay").value);
+        var outlookHour = document.getElementById("outlookHR").value;
+        var outlookType = document.getElementById("outlookTYP").value;
+        
+
+        if (day < 10){
+          day = "0"+day;
+        }
+
+        if (month < 10){
+          month = "0"+month;
+        }
+
+        Sub = Sub + year.toString() + "/day1otlk_" + year.toString() + month.toString() + day.toString() + "_" + outlookHour + "_" + outlookType + ".gif";
+        NewSub = NewSub + year.toString() + "/day1probotlk_" + year.toString() + month.toString() + day.toString() + "_" + outlookHour + "_" + outlookType + ".gif";
+
+        console.log(Sub, NewSub);
+
+        var tempimg = new Image();
+        tempimg.src = Sub;
+
+        var tempimg2 = new Image();
+        tempimg2.src = NewSub;
+
+        tempimg.onerror = function(){
+          console.log("H");
+
+          ctx.fillStyle = "#e5e5e5";
+          ctx.fillRect(0,0, 1000, 750);
+
+          ctx.drawImage(tempimg2, 0, 0, tempimg2.width, tempimg2.height, 0,0,1000,750);
+        }
+        
+        tempimg.onload = function(){
+          console.log(tempimg.width);
+          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+          ctx.fillStyle = "#e5e5e5";
+          ctx.fillRect(0,0, 1000, 750);
+
+          ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+			  }
+
+        tempimg2.onload = function(){
+          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+          ctx.fillStyle = "#e5e5e5";
+          ctx.fillRect(0,0, 1000, 750);
+
+          ctx.drawImage(tempimg2, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+			  }
+      }
+
+
+      function showSounding(){
+        var oldBase = "https://www.spc.noaa.gov/exper/archive/events/110427/raobs/ILX_12_obs.gif";
+        var newBase = "https://www.spc.noaa.gov/exper/archive/events/20190520/soundings/19052012_SNDG/TOP.gif";
+
+        var year = document.getElementById("dateYear").value;
+        var month = Number(document.getElementById("dateMonth").value);
+        var day = Number(document.getElementById("dateDay").value);
+        var office = document.getElementById("offices").value;
+        var hour = 12;
+
+        var isNew = true;
+
+        if (year <= 2011){
+          if (year == 2011){
+            if (month <= 9){
+              isNew = false;
+            } else {
+              isNew = true;
+            }
+          }
+        } else {
+          isNew = true;
+        }
+
+        if (isNew) {
+          newBase = newBase + year.toString() + month.toString() + day.toString() + "/soundings/" + year.toString().substring(2,4) + month.toString() + day.toString() + hour.toString() + "_SNDG/" + office.toString() + ".gif";
+        }
+      }
+
+
+
+
+
+
+      function showReports(){
+        var Sub = "https://www.spc.noaa.gov/climo/reports/";
+
+        var year = document.getElementById("dateYear").value;
+        var month = Number(document.getElementById("dateMonth").value);
+        var day = Number(document.getElementById("dateDay").value);
+
+        if (day < 10){
+          day = "0"+day;
+        }
+
+        if (month < 10){
+          month = "0"+month;
+        }
+
+        Sub = Sub + year.toString().substring(2,4) + month.toString() + day.toString() +"_rpts.gif";
+
+        console.log(Sub);
+
+        var tempimg = new Image();
+        tempimg.src = Sub;
+        
+        tempimg.onload = function(){
+          console.log(tempimg.width);
+          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+          ctx.fillStyle = "#e5e5e5";
+          ctx.fillRect(0,0, 1000, 750);
+
+          ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+			  }
+      }
+
       function switchDisplayDate(){
         displayDate = !displayDate;
         var bt = document.getElementById("displayButton");
-
+      
         if (displayDate){
           bt.innerHTML = "Display Date: OFF";
         } else {
@@ -348,170 +673,192 @@
 	  var zoomlim = {max:2000, min: 200, step: 100};
 	  var poslim = {x:{max:3000, min: 500, step: 100},y:{max:3000, min: 500, step: 100}};
 
-      function loadData(){
-		if (param == "sfc"){
-			const base = "https://www.wpc.ncep.noaa.gov/archives/sfc/";
-			const base2 = "/lrgnamsfc";
-			
-			var trueHour = modifyReal();
-			
-			var year = document.getElementById("dateYear").value;
-			var month = Number(document.getElementById("dateMonth").value);
-			var day = Number(document.getElementById("dateDay").value);
-			var hour = slider.value;
-			
-			if (trueHour[1] == 1){
-			  day += 1;
+    function loadData(){
+      //load_soundings();
+      if (param == "sfc"){
+        const base = "https://www.wpc.ncep.noaa.gov/archives/sfc/";
+        const base2 = "/lrgnamsfc";
+        
+        var trueHour = modifyReal();
+        
+        var year = document.getElementById("dateYear").value;
+        var month = Number(document.getElementById("dateMonth").value);
+        var day = Number(document.getElementById("dateDay").value);
+        var hour = slider.value;
+        
+        if (trueHour[1] == 1){
+          day += 1;
 
-			  if ((day > 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day > 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
-				month += 1;
-				day = 0;
-			  }
-			}
+          if ((day >= 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day >= 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
+            month += 1;
+            day = 0;
+          }
 
-			//if (trueHour < 10){
-			//  trueHour = "0"+trueHour;
-		   // }
+          if (month == 13){
+            month = 0;
+            year += 1;
+          }
+        }
 
-			if (day < 10){
-			  day = "0"+day;
-			}
+        console.log(month);
 
-			if (month < 10){
-			  month = "0"+month;
-			}
+        //if (trueHour < 10){
+        //  trueHour = "0"+trueHour;
+        // }
 
-			var string = base + year.toString() + base2 + year.toString() + month.toString() + day.toString() + trueHour[0]+".gif";
+        if (day < 10){
+          day = "0"+day;
+        }
 
+        if (month < 10){
+          month = "0"+month;
+        }
 
-			var tempimg = new Image();
-			tempimg.src = string;
-			
-			tempimg.onload = function(){
-			  ctx.drawImage(bgImg, pos.x, pos.y, zoom, zoom * 0.75, 0, 0, 1000, 750);
-			  ctx.globalAlpha = 0.666;
-			  ctx.drawImage(tempimg, pos.x, pos.y, zoom, zoom * 0.75, 0, 0, 1000, 750);
-			  ctx.globalAlpha = 1;
-			  
-			  if (!displayDate){
-				//ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
-			  } else {
-				//ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
-				var num = Math.round(modify(slider.value)/3) * 3;
-				
-				if (year <= 2005 && month < 5){
-				  ctx.fillStyle = "#f6f6f6";
-				  ctx.fillRect(0, 700, 1000, 50);
-					
-				  ctx.fillStyle = "rgb(15, 35, 105)";
+        trueHour[0] = Math.floor(trueHour[0]/3)*3;
 
-				  ctx.font = "bold 35px Arial";
-				  ctx.fillText(num+"Z - "+paramName, 50, 740);
-				  
+        console.log(trueHour[0]);
 
-				  ctx.font = "bold 15px Arial";
-				  ctx.fillText("(+/-1Z)", 950, 740);
-				} else {
-				  ctx.fillStyle = "#f6f6f6";
-				  ctx.fillRect(0, 675, 1000, 75);
-
-				  ctx.fillStyle = "rgb(15, 35, 105)";
-				  ctx.font = "bold 35px Arial";
-				  ctx.fillText(num+"Z - "+paramName, 50, 740);
+        var string = base + year.toString() + base2 + year.toString() + month.toString() + day.toString() + trueHour[0]+".gif";
 
 
-				  ctx.font = "bold 15px Arial";
-				  ctx.fillText("(+/-1Z)", 950, 740);
-				}
-			  }
-			}
-		} else {
-			const base = "https://www.spc.noaa.gov/exper/ma_archive/images_s4/";
-			var year = document.getElementById("dateYear").value;
-			var month = Number(document.getElementById("dateMonth").value);
-			var day = Number(document.getElementById("dateDay").value);
-			var hour = slider.value;
-			
+        var tempimg = new Image();
+        tempimg.src = string;
+        
+        tempimg.onload = function(){
+          ctx.drawImage(bgImg, pos.x, pos.y, zoom, zoom * 0.75, 0, 0, 1000, 750);
+          ctx.globalAlpha = 0.666;
+          ctx.drawImage(tempimg, pos.x, pos.y, zoom, zoom * 0.75, 0, 0, 1000, 750);
+          ctx.globalAlpha = 1;
+          
+          if (!displayDate){
+          //ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+          } else {
+          //ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
+          var num = Math.round(modify(slider.value)/3) * 3;
+          
+          if (year <= 2005 && month < 5){
+            ctx.fillStyle = "#f6f6f6";
+            ctx.fillRect(0, 700, 1000, 50);
+            
+            ctx.fillStyle = "rgb(15, 35, 105)";
 
-			var trueHour = modifyReal();
+            ctx.font = "bold 35px Arial";
+            ctx.fillText(num+"Z - "+paramName, 50, 740);
+            
 
-			if (trueHour[1] == 1){
-			  day += 1;
+            ctx.font = "bold 15px Arial";
+            ctx.fillText("(+/-1Z)", 950, 740);
+          } else {
+            ctx.fillStyle = "#f6f6f6";
+            ctx.fillRect(0, 675, 1000, 75);
 
-			  if ((day > 31 && (month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec")) || (day > 30 && (month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov")) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == "Feb" && leapyear() == false)){
-				month += 1;
-				day = 0;
-			  }
-			}
-
-			//if (trueHour < 10){
-			//  trueHour = "0"+trueHour;
-		   // }
-
-			if (day < 10){
-			  day = "0"+day;
-			}
-
-			if (month < 10){
-			  month = "0"+month;
-			}
-
-			var string = base + year.toString() + month.toString() + day.toString() +"/"+trueHour[0]+"_"+param;
+            ctx.fillStyle = "rgb(15, 35, 105)";
+            ctx.font = "bold 35px Arial";
+            ctx.fillText(num+"Z - "+paramName, 50, 740);
 
 
-			var tempimg = new Image();
-			tempimg.src = string;
-			
-			tempimg.onload = function(){
-			  console.log(tempimg.width);
-			  //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
-			  ctx.fillStyle = "#e5e5e5";
-			  ctx.fillRect(0,0, 1000, 750);
+            ctx.font = "bold 15px Arial";
+            ctx.fillText("(+/-1Z)", 950, 740);
+          }
+          }
+        }
+      } else {
+        const base = "https://www.spc.noaa.gov/exper/ma_archive/images_s4/";
+        var year = document.getElementById("dateYear").value;
+        var month = Number(document.getElementById("dateMonth").value);
+        var day = Number(document.getElementById("dateDay").value);
+        var hour = slider.value;
 
-			  if (!displayDate){
-				ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
-			  } else {
-				ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
+        var trueHour = modifyReal();
 
-				if (year < 2023){
-				  ctx.fillStyle = "#f6f6f6";
-				  ctx.fillRect(0, 700, 1000, 50);
+        //month == "Jan" || month == "Mar" || month == "May" || month == "Jul" || month == "Aug" || month == "Oct" || month == "Dec"
+        //month == "Apr" || month == "Jun" || month == "Sep" || month == "Nov"
+        if (trueHour[1] == 1){
+          day += 1;
 
-				  ctx.fillStyle = "rgb(15, 35, 105)";
-				  if (paramName.length > 55){
-					ctx.font = "bold 15px Arial";
-					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-				  } else if (paramName.length > 35){
-					ctx.font = "bold 25px Arial";
-					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-				  } else {
-					ctx.font = "bold 35px Arial";
-					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-				  }
-				  
+          if ((day >= 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)) || (day >= 30 && (month == 4 || month == 6 || month == 9 || month == 11)) || (day > 29 && month == "Feb" && leapyear() == true) || (day > 28 && month == 2 && leapyear() == false)){
+            month += 1;
+            day = 1;
+          }
 
-				  ctx.font = "bold 15px Arial";
-				  ctx.fillText("(+/-1Z)", 950, 740);
-				} else {
-				  ctx.fillStyle = "#f6f6f6";
-				  ctx.fillRect(0, 675, 1000, 75);
+          if (month == 13){
+            month = 1;
+            year += 1;
+          }
+        }
 
-				  ctx.fillStyle = "rgb(15, 35, 105)";
-				  if (paramName.length > 55){
-					ctx.font = "bold 15px Arial";
-					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-				  } else if (paramName.length > 35){
-					ctx.font = "bold 25px Arial";
-					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-				  } else {
-					ctx.font = "bold 35px Arial";
-					ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
-				  }
+        console.log(month);
+
+        //if (trueHour < 10){
+        //  trueHour = "0"+trueHour;
+        // }
+
+       
+
+        if (day < 10){
+          day = "0"+day;
+        }
+
+        if (month < 10){
+          month = "0"+month;
+        }
+
+        var string = base + year.toString() + month.toString() + day.toString() +"/"+trueHour[0]+"_"+param;
 
 
-				  ctx.font = "bold 15px Arial";
-				  ctx.fillText("(+/-1Z)", 950, 740);
-				}
+        var tempimg = new Image();
+        tempimg.src = string;
+        
+        tempimg.onload = function(){
+          console.log(tempimg.width);
+          //ctx.drawImage(tempimg, 0, 0, 1000, 750, 0,0,1000,750);
+          ctx.fillStyle = "#e5e5e5";
+          ctx.fillRect(0,0, 1000, 750);
+
+          if (!displayDate){
+          ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0,0,1000,750);
+          } else {
+          ctx.drawImage(tempimg, 0, 0, tempimg.width, tempimg.height, 0, 0, 1000, 750);
+
+          if (year < 2023){
+            ctx.fillStyle = "#f6f6f6";
+            ctx.fillRect(0, 700, 1000, 50);
+
+            ctx.fillStyle = "rgb(15, 35, 105)";
+            if (paramName.length > 55){
+            ctx.font = "bold 15px Arial";
+            ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+            } else if (paramName.length > 35){
+            ctx.font = "bold 25px Arial";
+            ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+            } else {
+            ctx.font = "bold 35px Arial";
+            ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+            }
+            
+
+            ctx.font = "bold 15px Arial";
+            ctx.fillText("(+/-1Z)", 950, 740);
+          } else {
+            ctx.fillStyle = "#f6f6f6";
+            ctx.fillRect(0, 675, 1000, 75);
+
+            ctx.fillStyle = "rgb(15, 35, 105)";
+            if (paramName.length > 55){
+            ctx.font = "bold 15px Arial";
+            ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+            } else if (paramName.length > 35){
+            ctx.font = "bold 25px Arial";
+            ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+            } else {
+            ctx.font = "bold 35px Arial";
+            ctx.fillText(modify(slider.value)+"Z - "+paramName, 50, 740);
+            }
+
+
+            ctx.font = "bold 15px Arial";
+            ctx.fillText("(+/-1Z)", 950, 740);
+          }
 			  }
 			}
 		}
