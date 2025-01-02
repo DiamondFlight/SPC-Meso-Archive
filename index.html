@@ -12,8 +12,9 @@
   
   <body onload="loadData()" style="background-color: #765b76;">
     <!--<p style="position:fixed; left:390px; top: 0px; background-color: #e5e5e5; font-size: 20px; font-weight: 850px; font-family: monospace;">Some of the Images will be 1 hour<br> behind because of how they are<br> stored in the noaa database</p>-->
-    <canvas id="imageCa" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5"></canvas>
-    <!--<canvas id="imageCaSound" width="1000px" height="450px" style="position:absolute;left:850px;top:775px;background-color: #e5e5e5"></canvas>-->
+    <canvas id="imageCa" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5;"></canvas>
+    <!--<canvas id="imageCaSound" width="1000px" height="550px" style="position:absolute;left:850px;top:280px;background-color: #e5e5e5; visibility: hidden;"></canvas>-->
+    <!--<button id="soundingButton" width="10px" height="50px" style="position:absolute;left:1050px;top:25px;">Display: Parameters</button>-->
     <!--<img id="showimage" width="1000px" height="750px" style="position:absolute;left:850px;top:20px;background-color: #e5e5e5;object-fit: cover;">-->
     <div id="showimagebg" width="1000px" height="750px" style="position:absolute;left:500px;top:20px;background-color: #e5e5e5;object-fit: cover;"></div>
     <div id="dropdowns">
@@ -126,6 +127,10 @@
         <button id="paramSelect" style="width:22%;background-color: #828;" onclick="changeParam('mcon.gif','Surface Mstr Conv and Mixing Ratio (fill)')">Moisture Convergence</button>
         <button id="paramSelect" style="width:19%;background-color: #828;" onclick="changeParam('thea.gif','Surface Theta-E (fill) / Advection (C/hr)')">ThetaE Advection</button>
         <button id="paramSelect" style="width:19%;background-color: #828;" onclick="changeParam('pchg.gif','2hr sfc pres chg (mb)')">2hr Pres Change</button>
+		<button id="paramSelect" style="width:49%;background-color: #828;" onclick="changeParam('mcon.gif','Sfc moisture conv/mixing ratio')">Sfc moisture convergence+mixing ratio </button>
+		<button id="paramSelect" style="width:49%;background-color: #828;" onclick="changeParam('mixr.gif','100mb mean mixing ratio (fill)/sfc streamlines')">100mb Mixing Ratio/Sfc Streamline (>May 2023)</button>
+		<button id="paramSelect" style="width:49%;background-color: #828;" onclick="changeParam('mxth.gif','Sfc mixing ratio (fill)/theta/sfc wind')">Sfc mixing ratio/theta/sfc wind</button>
+		<button id="paramSelect" style="width:49%;background-color: #828;" onclick="changeParam('mixr_chg.gif','100mb mean mix ratio 3h change(fill)/sfc wind')">3hr mix ratio change/sfc wind</button>
         <p id="paramSection">Basic UA/Forcing Fields</p>
         <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('300mb.gif','300mb hght/divergence/wind')">300 mb</button>	
         <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('500mb.gif','500mb hght/temp/wind')">500 mb</button>
@@ -147,7 +152,7 @@
         <button id="paramSelect" onclick="changeParam('ddiv.gif','850mb conv(red), 850mb differential divergence (fill), 250mb divergence (purple)')">850-250 mb Diff. Diverge</button>
         <button id="paramSelect" onclick="changeParam('ageo.gif','300mb isotach (fill), height, ageostrophic wind; 700-500mb layer-ave omega (magenta-up/red-down)')">300 mb Jet Circulation</button>
         <button id="paramSelect" onclick="changeParam('mnwd.gif','850-300mb mean wind (kt)')">850-300mb Mean Wind</button>
-		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('dvvr.gif','Surface Vorticity (fill) and (Divergence) (conv=SOLID red, divg=DASHED blue')">(NEW) Divergence &amp; SFC Vorticity</button>
+		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('dvvr.gif','Surface Vorticity (fill) and (Divergence) (conv=SOLID red, divg=DASHED blue')">Divergence &amp; SFC Vorticity</button>
 		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('tadv.gif','850mb temperature advection (fill - 10e-5 C/s)')">850 mb Temperature Advection</button>
 		<button id="paramSelect" style="background-color: #248;" onclick="changeParam('7tad.gif','700mb temperature advection (fill - 10e-5 C/s)')">700 mb Temp Adv (>May 2023 only)</button>
         <p id="paramSection">Thermodynamic Fields</p>
@@ -155,13 +160,16 @@
         <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('mlcp.gif','MLCAPE (contour) and MLCIN (J/kg, shaded >25)')">MLCape</button>
         <button id="paramSelect" style="background-color: #828;width:24%;padding-left: 0px;padding-right: 0px;"onclick="changeParam('mucp.gif','MUCAPE (contour) and lifted parcel level (m AGL, fill)')">MUCape / LPL Height</button>
         <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('muli.gif','SBLI (500mb) and SBCIN (J/kg, shaded >25)')">SB Lifted Index / CINH</button>
-        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('laps.gif','700-500mb LR (Mid Level)')">Mid Level Lapse Rates</button>
-        <button id="paramSelect" style="background-color: #828;" onclick="changeParam('lllr.gif','0-3km LR (Low Level)')">Low Level Lapse Rates</button>
-        <button id="paramSelect" onclick="changeParam('ncap.gif','Normalized Cape')">Normalized Cape</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('dcape.gif','DCAPE (downdraft)')">Downdraft Cape</button>
-        <button id="paramSelect" style="background-color: #248; width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif','100mb mean Parcel LFC height (m AGL)')">LFC Height</button>
-        <button id="paramSelect" style="background-color: #248; width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif','100mb mean Parcel LCL height (m AGL)')">LCL Height</button>
-        <button id="paramSelect" style="width:24%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfrh.gif','LCL-LFC mean RH (fill), MUCape >100 (contour)')">LCL - LFC RH</button>
+        <button id="paramSelect" style="background-color: #828;width:49%" onclick="changeParam('laps.gif','700-500mb LR (Mid Level)')">Mid Level Lapse Rates</button>
+		<button id="paramSelect" style="background-color: #828;width:49%" onclick="changeParam('laps_chg.gif','6hr 700-500mb LR  change(Mid Level)')">6hr MLLR Change (&lt 05/2023)</button>
+		<button id="paramSelect" style="background-color: #828;width:49%" onclick="changeParam('lllr.gif','0-3km LR (Low Level)')">Low Level Lapse Rates</button>
+		<button id="paramSelect" style="background-color: #828;width:49%" onclick="changeParam('lllr_chg.gif','3hr 0-3km LR change(Low Level)')">3hr LLLR change (&lt 05/2023)</button>
+        
+        <button id="paramSelect" style="width:20%" onclick="changeParam('ncap.gif','Normalized Cape')">Normalized Cape</button>
+        <button id="paramSelect" style="width:20%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('dcape.gif','DCAPE (downdraft)')">Downdraft Cape</button>
+        <button id="paramSelect" style="background-color: #248; width:18%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfch.gif','100mb mean Parcel LFC height (m AGL)')">LFC Height</button>
+        <button id="paramSelect" style="background-color: #248; width:18%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lclh.gif','100mb mean Parcel LCL height (m AGL)')">LCL Height</button>
+        <button id="paramSelect" style="width:18%;padding-left: 0px;padding-right: 0px;" onclick="changeParam('lfrh.gif','LCL-LFC mean RH (fill), MUCape >100 (contour)')">LCL - LFC RH</button>
         <p id="paramSection">Wind Shear</p>
         <button id="paramSelect" style="background-color: #828;" onclick="changeParam('xover.gif','850mb & 500mb Wind Crossover')">850 &amp; 500 mb winds</button>
         <button id="paramSelect" style="background-color: #828;" onclick="changeParam('eshr.gif','Effective bulk Shear (kt)')">Effective Shear</button>
@@ -196,7 +204,7 @@
         <button id="paramSelect" style="background-color: #248; width:24%;"  onclick="changeParam('pwtr.gif','Precipitable water (in) lowest 400mb')">PWAT (Precip. Water)</button>
         <button id="paramSelect" style="background-color: #248; width:24%;" onclick="changeParam('tran.gif','850mb Moisture transport (fill/vector), 850mb height/theta-e')">850 mb Moisture Transport</button>
         <button id="paramSelect" style="width:24%;"onclick="changeParam('prop.gif','precipitable water (fill), upwind propagation vectors, 1000-500mb thickness')">Upwind Propagation Vector</button>
-        <button id="paramSelect" style="width:24%;" onclick="changeParam('swbt.gif','Near freezing surface wet bulb temperatures, pres, and wind')">Surface Wet Bulb Temperature</button>
+        <button id="paramSelect" style="width:24%;" onclick="changeParam('swbt.gif','Near freezing surface wet bulb temperatures, pres, and wind')">Sfc Wet Bulb Temperature</button>
         
         <button id="paramSelect" onclick="changeParam('thck.gif','Critical Thickness 1000-500mb red, 1000-700mb green, 1000-850mb blue, 850-700mb yellow, sfc temp OC magenta')">Critical Thickness</button>
         <button id="paramSelect" onclick="changeParam('epvl.gif','850mb Frontogenesis (red), EPVGx (shaded) & conditional instability')">800-750 mb EPVg</button>
@@ -216,7 +224,7 @@
       
     </div>
 	
-	//https://www.spc.noaa.gov/exper/archive/events/20120302/soundings/12030212_SNDG/sndgmap.gif
+	<!--//https://www.spc.noaa.gov/exper/archive/events/20120302/soundings/12030212_SNDG/sndgmap.gif-->
 	
 	<map name="stations">
        <area shape="circle" coords="136,103,5" href="javascript:show_soundings(&quot;LMN&quot;)" alt="LMN">
@@ -414,7 +422,7 @@
         tempso.onload = function(){
           ctxs.fillStyle = "#ffffff";
           ctxs.fillRect(280,0, 700,450);
-          ctxs.drawImage(tempso, 0, 0, tempso.width, tempso.height, 300,0,700,450);
+          ctxs.drawImage(tempso, 0, 0, tempso.width, tempso.height, 0,0,cont2.width,cont2.height);
         }
       }
 
@@ -674,7 +682,7 @@
 	  var poslim = {x:{max:3000, min: 500, step: 100},y:{max:3000, min: 500, step: 100}};
 
     function loadData(){
-      //load_soundings();
+     
       if (param == "sfc"){
         const base = "https://www.wpc.ncep.noaa.gov/archives/sfc/";
         const base2 = "/lrgnamsfc";
